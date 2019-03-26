@@ -1,0 +1,14 @@
+{
+  "name": "jfischer/motorfiscal",
+  "description": "Classes para auxiliar no calculo de notas fiscais",
+  "type": "library",
+  "license": "BSD",
+  "authors": [
+    {
+      "name": "Jonatas Fischer",
+      "email": "jonatas.fischer@hotmail.com"
+    }
+  ],
+  "minimum-stability": "alpha",
+  "require": {}
+}
