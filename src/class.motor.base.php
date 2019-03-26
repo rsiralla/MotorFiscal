@@ -7,8 +7,8 @@ namespace MotorFiscal;
  */
 class Base
 {
-    public $customInfo = array();
     protected $externalProp = array();
+    public $customInfo = array();
 
     public function assign($obj)
     {
@@ -19,10 +19,18 @@ class Base
         }
     }
 
-    public function __get($name)
+    public function __setAll($obj)
     {
+        foreach ($obj as $key => $value) {
+            $this->__set($key, $value);
+        }
+    }
+
+    public function __set($name, $value)
+    {
+
         if (property_exists($this, $name)) {
-            return $this->$name;
+            return $this->$name = $value;
         } else {
             $trace = debug_backtrace();
             trigger_error(
@@ -33,11 +41,10 @@ class Base
         }
     }
 
-    public function __set($name, $value)
+    public function __get($name)
     {
-
         if (property_exists($this, $name)) {
-            return $this->$name = $value;
+            return $this->$name;
         } else {
             $trace = debug_backtrace();
             trigger_error(

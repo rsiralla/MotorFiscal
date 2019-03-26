@@ -1,5 +1,4 @@
 <?php
-
 namespace MotorFiscal;
 require_once "class.motor.base.php";
 
@@ -7,7 +6,7 @@ class Operacao extends Base
 {
     protected $identificador;
     protected $CFOPMercadoria;
-    protected $NaturezaOperacao;/*DescriÃ§Ã£o*/
+    protected $NaturezaOperacao;/*Descrição*/
     protected $CFOPMercadoriaST;
     protected $CFOPMercadoriaSTSubstituido;
     protected $CFOPProduto;

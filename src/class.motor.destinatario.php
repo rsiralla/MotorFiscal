@@ -1,11 +1,11 @@
 <?php
-
 namespace MotorFiscal;
 /**
- * Classe com todas as informaÃ§Ãµes do destinatÃ¡rio
+ * Classe com todas as informações do destinatário
  */
 class Destinatario extends Base
 {
+    Public $identificador;
     /**
      * NF-e/NFC-e :E02 - CNPJ
      */
@@ -22,14 +22,15 @@ class Destinatario extends Base
      * NF-e/NFC-e :E04 - xNome
      */
     Public $xNome;
+    Public $xFant;//Variável auxiliar
     /**
      * NF-e/NFC-e :E06 - Logradouro
      */
     Public $xLgr;
     /**
-     * NF-e/NFC-e :E07 - NÃºmero
+     * NF-e/NFC-e :E07 - Número
      */
-    Public $nro;//VariÃ¡vel auxiliar
+    Public $nro;
     /**
      * NF-e/NFC-e :E08 - Complemento
      */
@@ -39,11 +40,11 @@ class Destinatario extends Base
      */
     Public $xBairro;
     /**
-     * NF-e/NFC-e :E10 - CÃ³digo do municÃ­pioMun
+     * NF-e/NFC-e :E10 - Código do municípioMun
      */
     Public $cMun;
     /**
-     * NF-e/NFC-e :E11 - Nome do municÃ­pio
+     * NF-e/NFC-e :E11 - Nome do município
      */
     Public $xMun;
     /**
@@ -51,15 +52,15 @@ class Destinatario extends Base
      */
     Public $UF;
     /**
-     * NF-e/NFC-e :E13 - CÃ³digo do CEP
+     * NF-e/NFC-e :E13 - Código do CEP
      */
     Public $CEP;
     /**
-     * NF-e/NFC-e :E14 - CÃ³digo do PaÃ­s
+     * NF-e/NFC-e :E14 - Código do País
      */
     Public $cPais;
     /**
-     * NF-e/NFC-e :E15 - Nome do PaÃ­s
+     * NF-e/NFC-e :E15 - Nome do País
      */
     Public $xPais;
     /**
@@ -86,7 +87,9 @@ class Destinatario extends Base
      * NF-e/NFC-e :E19 - email
      */
     Public $email;
-    protected $identificador;
-    protected $xFant;
 
+
+    Public $tipo_cadastro;
+    Public $id_estado;
+    Public $id_cidade;
 }

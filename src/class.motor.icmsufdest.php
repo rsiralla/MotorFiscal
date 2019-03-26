@@ -1,8 +1,10 @@
 <?php
 
-namespace MotorFiscal {
-    class ICMSUFDest extends Base
-    {
+namespace MotorFiscal;
+require_once "class.motor.base.php";
+
+class ICMSUFDest extends Base
+{
         /**
          * NF-e/NFC-e :NA03 - vBCUFDest
          */
@@ -43,5 +45,4 @@ namespace MotorFiscal {
          */
         Public $vICMSUFRemet;
 
-    }
 }

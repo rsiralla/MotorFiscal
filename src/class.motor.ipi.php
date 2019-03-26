@@ -3,71 +3,74 @@
 namespace MotorFiscal;
 require_once "class.motor.base.php";
 
+/**
+ * Classe com todas as informações para escrituração do IPI
+ */
 class IPI extends Base
 {
 
     /**
      * NF-e/NFC-e :O02 - clEnq
      */
-    Public $clEnq;
+    public $clEnq;
 
 
     /**
      * NF-e/NFC-e :O03 - CNPJProd
      */
-    Public $CNPJProd;
+    public $CNPJProd;
 
 
     /**
      * NF-e/NFC-e :O04 - cSelo
      */
-    Public $cSelo;
+    public $cSelo;
 
 
     /**
      * NF-e/NFC-e :O05 - qSelo
      */
-    Public $qSelo;
+    public $qSelo;
 
 
     /**
      * NF-e/NFC-e :O06 - cEnq
      */
-    Public $cEnq;
+    public $cEnq;
 
 
     /**
      * NF-e/NFC-e :O09 - CST
      */
-    Public $CST;
+    public $CST;
 
 
     /**
      * NF-e/NFC-e :O10 - vBC
      */
-    Public $vBC;
+    public $vBC;
 
 
     /**
      * NF-e/NFC-e :O11 - qUnid
      */
-    Public $qUnid;
+    public $qUnid;
 
 
     /**
      * NF-e/NFC-e :O12 - vUnid
      */
-    Public $vUnid;
+    public $vUnid;
 
 
     /**
      * NF-e/NFC-e :O13 - pIPI
      */
-    Public $pIPI;
+    public $pIPI;
 
 
     /**
      * NF-e/NFC-e :O14 - vIPI
      */
-    Public $vIPI;
+    public $vIPI;
 }

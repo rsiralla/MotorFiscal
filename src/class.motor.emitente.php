@@ -1,13 +1,15 @@
 <?php
-
 namespace MotorFiscal;
 require_once "class.motor.base.php";
 
 /**
- * Classe com todas as infromaÃ§Ãµes do destinatario
+ * Classe com todas as infromações do destinatario
  */
 class Emitente extends Base
 {
+    Public $PercCreditoSimples;
+    Public $identificador;
+    Public $ContribuinteIPI;
     /**
      * NF-e/NFC-e :C02 - CNPJ
      */
@@ -24,18 +26,22 @@ class Emitente extends Base
      * NF-e/NFC-e :C04 - xFant
      */
     Public $xFant;
+
     /**
      * NF-e/NFC-e : C06 - xLgr
      */
     Public $xLgr;
+
     /**
      * NF-e/NFC-e : C07 - nro
      */
     Public $nro;
+
     /**
      * NF-e/NFC-e : C08 - xCpl
      */
     Public $xCpl;
+
     /**
      * NF-e/NFC-e : C09 - xBairro
      */
@@ -88,7 +94,8 @@ class Emitente extends Base
      * NF-e/NFC-e : C21 - CRT
      */
     Public $CRT;
-    protected $PercCreditoSimples;
-    protected $identificador;
-    protected $ContribuinteIPI;
+
+    Public $num_versao_ibpt;
+    Public $id_estado;
+    Public $id_cidade;
 }

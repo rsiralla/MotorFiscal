@@ -8,17 +8,17 @@ class IdentificacaoNFe extends Base
 {
 
     /**
-     * NF-e/NFC-e :B02 - cUF - C√≥digo da UF do emitente do Documento Fiscal
+     * NF-e/NFC-e :B02 - cUF - CÛdigo da UF do emitente do Documento Fiscal
      */
     Public $cUF;
 
     /**
-     * NF-e/NFC-e :B03 - cNF - C√≥digo Num√©rico que comp√µe a Chave de Acesso
+     * NF-e/NFC-e :B03 - cNF - CÛdigo NumÈrico que compıe a Chave de Acesso
      */
     Public $cNF;
 
     /**
-     * NF-e/NFC-e :B04 - natOp - Descri√ß√£o da Natureza da Opera√ß√£o
+     * NF-e/NFC-e :B04 - natOp - DescriÁ„o da Natureza da OperaÁ„o
      */
     Public $natOp;
 
@@ -28,82 +28,82 @@ class IdentificacaoNFe extends Base
     Public $indPag;
 
     /**
-     * NF-e/NFC-e :B06 - mod - C√≥digo do Modelo do Documento Fiscal
+     * NF-e/NFC-e :B06 - mod - CÛdigo do Modelo do Documento Fiscal
      */
     Public $mod;
 
     /**
-     * NF-e/NFC-e :B07 - serie - S√©rie do Documento Fiscal
+     * NF-e/NFC-e :B07 - serie - SÈrie do Documento Fiscal
      */
     Public $serie;
 
     /**
-     * NF-e/NFC-e :B08 - nNF - N√∫mero do Documento Fiscal
+     * NF-e/NFC-e :B08 - nNF - N˙mero do Documento Fiscal
      */
     Public $nNF;
 
     /**
-     * NF-e/NFC-e :B09 - dhEmi - Data e hora de emiss√£o do Documento Fiscal
+     * NF-e/NFC-e :B09 - dhEmi - Data e hora de emiss„o do Documento Fiscal
      */
     Public $dhEmi;
 
     /**
-     * NF-e/NFC-e :B10 - dhSaiEnt - Data e hora de Sa√≠da ou da Entrada da Mercadoria/Produto
+     * NF-e/NFC-e :B10 - dhSaiEnt - Data e hora de SaÌda ou da Entrada da Mercadoria/Produto
      */
     Public $dhSaiEnt;
 
     /**
-     * NF-e/NFC-e :B11 - tpNF - Tipo de Opera√ß√£o
+     * NF-e/NFC-e :B11 - tpNF - Tipo de OperaÁ„o
      */
     Public $tpNF;
 
     /**
-     * NF-e/NFC-e :B11a - idDest - Identificador de local de destino da opera√ß√£o
+     * NF-e/NFC-e :B11a - idDest - Identificador de local de destino da operaÁ„o
      */
     Public $idDest;
 
     /**
-     * NF-e/NFC-e :B12 - cMunFG - C√≥digo do Munic√≠pio de Ocorr√™ncia do Fato Gerador
+     * NF-e/NFC-e :B12 - cMunFG - CÛdigo do MunicÌpio de OcorrÍncia do Fato Gerador
      */
     Public $cMunFG;
 
     /**
-     * NF-e/NFC-e :B21 - tpImp - Formato de Impress√£o do DANFE
+     * NF-e/NFC-e :B21 - tpImp - Formato de Impress„o do DANFE
      */
     Public $tpImp;
 
     /**
-     * NF-e/NFC-e :B22 - tpEmis - Tipo de Emiss√£o da NF-e
+     * NF-e/NFC-e :B22 - tpEmis - Tipo de Emiss„o da NF-e
      */
     Public $tpEmis;
 
     /**
-     * NF-e/NFC-e :B23 - cDV - D√≠gito Verificador da Chave de Acesso da NF-e
+     * NF-e/NFC-e :B23 - cDV - DÌgito Verificador da Chave de Acesso da NF-e
      */
     Public $cDV;
 
     /**
-     * NF-e/NFC-e :B24 - tpAmb - Identifica√ß√£o do Ambiente
+     * NF-e/NFC-e :B24 - tpAmb - IdentificaÁ„o do Ambiente
      */
     Public $tpAmb;
 
     /**
-     * NF-e/NFC-e :B25 - finNFe - Finalidade de emiss√£o da NF-e
+     * NF-e/NFC-e :B25 - finNFe - Finalidade de emiss„o da NF-e
      */
     Public $finNFe;
 
     /**
-     * NF-e/NFC-e :B25a - indFinal - Indica opera√ß√£o com Consumidor final
+     * NF-e/NFC-e :B25a - indFinal - Indica operaÁ„o com Consumidor final
      */
     Public $indFinal;
 
     /**
-     * NF-e/NFC-e :B25b - indPres - Indicador de presen√ßa do comprador no estabelecimento comercial no momento da opera√ß√£o
+     * NF-e/NFC-e :B25b - indPres - Indicador de presenÁa do comprador no estabelecimento comercial no momento da operaÁ„o
      */
     Public $indPres;
 
     /**
-     * NF-e/NFC-e :B26 - procEmi - Processo de emiss√£o da NF-e
+     * NF-e/NFC-e :B26 - procEmi - Processo de emiss„o da NF-e
      */
     Public $procEmi;
 

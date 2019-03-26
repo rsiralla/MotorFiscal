@@ -1,5 +1,4 @@
 <?php
-
 Namespace MotorFiscal;
 require_once "class.motor.base.php";
 
@@ -16,23 +15,31 @@ class PIS extends Base
      * NF-e/NFC-e :Q07 - vBC
      */
     Public $vBC;
+    Private $_vBC;
+
+
     /**
      * NF-e/NFC-e :Q08 - pPIS
      */
     Public $pPIS;
+
+
     /**
      * NF-e/NFC-e :Q09 - vPIS
      */
     Public $vPIS;
+
+
     /**
      * NF-e/NFC-e :Q10 - qBCProd
      */
     Public $qBCProd;
+
+
     /**
      * NF-e/NFC-e :Q11 - vAliqProd
      */
     Public $vAliqProd;
-    Private $_vBC;
 }
 
 
