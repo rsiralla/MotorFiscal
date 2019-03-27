@@ -8,8 +8,11 @@ require_once "class.motor.base.php";
  */
 class ICMS extends Base
 {
-
-    /**
+	
+	protected $vICMS_Ficto = 0;
+	
+	
+	/**
      * NF-e/NFC-e :N11 - Orig
      */
     Public $orig;
