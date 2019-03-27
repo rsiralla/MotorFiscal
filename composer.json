@@ -2,7 +2,7 @@
 	"name": "jonatas-fischer/motor-fiscal",
   "description": "Classes para auxiliar no calculo de notas fiscais",
   "type": "library",
-  "license": "BSD",
+  "license": "0BSD",
   "authors": [
     {
       "name": "Jonatas Fischer",
