@@ -1,5 +1,5 @@
 {
-  "name": "jfischer/motorfiscal",
+	"name": "JonatasFischer/MotorFiscal",
   "description": "Classes para auxiliar no calculo de notas fiscais",
   "type": "library",
   "license": "BSD",
