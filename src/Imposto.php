@@ -33,6 +33,7 @@ class Imposto extends Base
 	public $ICMSUFDest;
 	/**
 	 * NF-e/NFC-e :O01 - IPI
+	 * @var \MotorFiscal\Federal\IPI
 	 */
 	public $IPI;
 	/**
@@ -41,14 +42,17 @@ class Imposto extends Base
 	public $II;
 	/**
 	 * NF-e/NFC-e :Q01 - PIS
+	 * @var \MotorFiscal\Federal\PIS
 	 */
 	public $PIS;
 	/**
 	 * NF-e/NFC-e :S01 - COFINS
+	 * @var \MotorFiscal\Federal\COFINS
 	 */
 	public $COFINS;
 	/**
 	 * NF-e/NFC-e :U01 - ISSQN
+	 * @var \MotorFiscal\Municipal\ISSQN
 	 */
 	public $ISSQN;
 	

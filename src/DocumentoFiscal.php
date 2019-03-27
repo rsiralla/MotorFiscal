@@ -79,73 +79,16 @@ class DocumentoFiscal extends Base
 	
 	public function &addItem(Produto $produto, Operacao $operacao = null)
 	{
-		/* Algumas validacoes */
-		if(empty($this->emit))
-		{
-			throw new Exception('Informe o Emitente da nota fiscal antes de adicionar um produto');
-		}
-		if($this->emit->ContribuinteIPI === null)
-		{
-			throw new Exception('Informe se o Emitente é contribuinte do IPI');
-		}
-		
-		if(empty($this->dest))
-		{
-			throw new Exception('Informe o Destinatário da nota fiscal antes de adicionar um produto');
-		}
-		if(empty($this->operacao))
-		{
-			throw new Exception('Informe a Operacao da nota fiscal antes de adicionar um produto');
-		}
-		
 		/* se não informar uma operação específica ao adicionar um item usar a operação da nota */
 		if(empty($operacao))
 		{
 			$operacao = $this->operacao;
 		}
 		
-		if($produto->tipoItem === 1)
-		{
-			if($produto->cMunFG === '')
-			{
-				throw new Exception("Deve ser informado o código do município do fato gerador do ISS na classe MotorFiscal\Produto para itens de serviço. Atual \"{$produto->cMunFG}\"");
-			}
-			
-			if($produto->cMun === '')
-			{
-				throw new Exception('Deve ser informado o código do município da incidência do ISS na classe MotorFiscal\Produto para itens de serviço');
-			}
-			
-			if($produto->cListServ === '')
-			{
-				throw new Exception('Deve ser informado o código do serviço (ABRASF) do ISS na classe MotorFiscal\Produto para itens de serviço');
-			}
-			
-			if($produto->cServico === '')
-			{
-				throw new Exception('Deve ser informado o código do serviço(Município) do ISS na classe MotorFiscal\Produto para itens de serviço');
-			}
-			
-			if($produto->cPais === '' && $produto->cMunFG == 9999999)
-			{
-				throw new Exception('Deve ser informado o código do pais para serviços internacionais na classe MotorFiscal\Produto para itens de serviço');
-			}
-			
-			if($produto->indISS === '')
-			{
-				throw new Exception('Deve ser informado a exigibilidade do ISS (1 = Sim, 2 = Não) MotorFiscal\Produto para itens de serviço');
-			}
-			
-			if($produto->indISS == 2 && $produto->nProcesso === '')
-			{
-				throw new Exception('Deve ser informado número do processo de inexigibilidade do ISSQN na classe MotorFiscal\Produto para itens de serviço');
-			}
-			
-			if($produto->indIncentivo === '')
-			{
-				throw new Exception('Deve ser informado a existência de incentivo fiscal(1=Sim, 2=Não) na classe MotorFiscal\Produto para itens de serviço');
-			}
-		}
+		$this->validate($produto, $operacao);
+		
+		
+		
 		
 		$item           = new ItemFiscal();
 		$item->Operacao = $operacao;
@@ -1099,6 +1042,73 @@ class DocumentoFiscal extends Base
 		else
 		{
 			return $callback($produto, $operacao, $this->emit, $this->dest);
+		}
+	}
+	
+	
+	private function validate(Produto $produto, Operacao $operacao)
+	{
+		
+		/* Algumas validações */
+		if(empty($this->emit))
+		{
+			throw new Exception('Informe o Emitente da nota fiscal antes de adicionar um produto');
+		}
+		if($this->emit->ContribuinteIPI === null)
+		{
+			throw new Exception('Informe se o Emitente é contribuinte do IPI');
+		}
+		
+		if(empty($this->dest))
+		{
+			throw new Exception('Informe o Destinatário da nota fiscal antes de adicionar um produto');
+		}
+		if(empty($this->operacao))
+		{
+			throw new Exception('Informe a Operacao da nota fiscal antes de adicionar um produto');
+		}
+		
+		if($produto->tipoItem === 1)
+		{
+			if($produto->cMunFG === '')
+			{
+				throw new Exception("Deve ser informado o código do município do fato gerador do ISS na classe MotorFiscal\Produto para itens de serviço. Atual \"{$produto->cMunFG}\"");
+			}
+			
+			if($produto->cMun === '')
+			{
+				throw new Exception('Deve ser informado o código do município da incidência do ISS na classe MotorFiscal\Produto para itens de serviço');
+			}
+			
+			if($produto->cListServ === '')
+			{
+				throw new Exception('Deve ser informado o código do serviço (ABRASF) do ISS na classe MotorFiscal\Produto para itens de serviço');
+			}
+			
+			if($produto->cServico === '')
+			{
+				throw new Exception('Deve ser informado o código do serviço(Município) do ISS na classe MotorFiscal\Produto para itens de serviço');
+			}
+			
+			if($produto->cPais === '' && $produto->cMunFG == 9999999)
+			{
+				throw new Exception('Deve ser informado o código do pais para serviços internacionais na classe MotorFiscal\Produto para itens de serviço');
+			}
+			
+			if($produto->indISS === '')
+			{
+				throw new Exception('Deve ser informado a exigibilidade do ISS (1 = Sim, 2 = Não) MotorFiscal\Produto para itens de serviço');
+			}
+			
+			if($produto->indISS == 2 && $produto->nProcesso === '')
+			{
+				throw new Exception('Deve ser informado número do processo de inexigibilidade do ISSQN na classe MotorFiscal\Produto para itens de serviço');
+			}
+			
+			if($produto->indIncentivo === '')
+			{
+				throw new Exception('Deve ser informado a existência de incentivo fiscal(1=Sim, 2=Não) na classe MotorFiscal\Produto para itens de serviço');
+			}
 		}
 	}
 	
