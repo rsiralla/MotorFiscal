@@ -2,7 +2,7 @@
 
 namespace MotorFiscal;
 /**
- * Classe com todas as informações do destinatário
+ * Classe com todas as informaÃ§Ãµes do destinatÃ¡rio
  */
 class Destinatario extends Base
 {
@@ -23,13 +23,13 @@ class Destinatario extends Base
 	 * NF-e/NFC-e :E04 - xNome
 	 */
 	public $xNome;
-	public $xFant;//Variável auxiliar
+	public $xFant;//VariÃ¡vel auxiliar
 	/**
 	 * NF-e/NFC-e :E06 - Logradouro
 	 */
 	public $xLgr;
 	/**
-	 * NF-e/NFC-e :E07 - Número
+	 * NF-e/NFC-e :E07 - NÃºmero
 	 */
 	public $nro;
 	/**
@@ -41,11 +41,11 @@ class Destinatario extends Base
 	 */
 	public $xBairro;
 	/**
-	 * NF-e/NFC-e :E10 - Código do municípioMun
+	 * NF-e/NFC-e :E10 - CÃ³digo do municÃ­pioMun
 	 */
 	public $cMun;
 	/**
-	 * NF-e/NFC-e :E11 - Nome do município
+	 * NF-e/NFC-e :E11 - Nome do municÃ­pio
 	 */
 	public $xMun;
 	/**
@@ -53,15 +53,15 @@ class Destinatario extends Base
 	 */
 	public $UF;
 	/**
-	 * NF-e/NFC-e :E13 - Código do CEP
+	 * NF-e/NFC-e :E13 - CÃ³digo do CEP
 	 */
 	public $CEP;
 	/**
-	 * NF-e/NFC-e :E14 - Código do País
+	 * NF-e/NFC-e :E14 - CÃ³digo do PaÃ­s
 	 */
 	public $cPais;
 	/**
-	 * NF-e/NFC-e :E15 - Nome do País
+	 * NF-e/NFC-e :E15 - Nome do PaÃ­s
 	 */
 	public $xPais;
 	/**

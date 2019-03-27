@@ -45,7 +45,7 @@ class DocumentoFiscal extends Base
 	
 	
 	/*
-	  Função para calcular a tributação do produto
+	  FunÃ§Ã£o para calcular a tributaÃ§Ã£o do produto
 	 */
 	public $buscaTribFunctionICMS;
 	public $buscaTribFunctionPIS;
@@ -77,110 +77,6 @@ class DocumentoFiscal extends Base
 	}
 	
 	
-	private function getTribISSQN(Produto $produto, Operacao $operacao)
-	{
-		$callback = $this->buscaTribFunctionISSQN;
-		if(!$this->objetoParametroPesquisa)
-		{
-			$tributacaoISSQN = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
-			                             $this->dest->identificador);
-		}
-		else
-		{
-			$tributacaoISSQN = $callback($produto, $operacao, $this->emit, $this->dest);
-		}
-		
-		return $tributacaoISSQN;
-	}
-	
-	
-	private function getTabelaIBPT(Produto $produto)
-	{
-		$callback = $this->buscaTribFunctionIBPT;
-		
-		if(!$this->objetoParametroPesquisa)
-		{
-			$tabelaIBPT = $callback($produto->identificador, $this->emit->identificador, $this->dest->identificador);
-		}
-		else
-		{
-			$tabelaIBPT = $callback($produto, $this->emit, $this->dest);
-		}
-		
-		return $tabelaIBPT;
-	}
-	
-	
-	private function getTribPIS(Produto $produto, Operacao $operacao)
-	{
-		$callback = $this->buscaTribFunctionPIS;
-		
-		if(!$this->objetoParametroPesquisa)
-		{
-			$tributacaoPIS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
-			                           $this->dest->identificador);
-		}
-		else
-		{
-			$tributacaoPIS = $callback($produto, $operacao, $this->emit, $this->dest);
-		}
-		
-		return $tributacaoPIS;
-	}
-	
-	
-	private function getTribICMS(Produto $produto, Operacao $operacao)
-	{
-		$callback = $this->buscaTribFunctionICMS;
-		/* pode pesquisar a tributação do produto passando dados como parametros ou os objetos*/
-		if($this->objetoParametroPesquisa)
-		{
-			$tributacaoICMS = $callback($produto, $operacao, $this->emit, $this->dest);
-		}
-		else
-		{
-			$tributacaoICMS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
-			                            $this->dest->identificador);
-		}
-		
-		return $tributacaoICMS;
-	}
-	
-	
-	private function getTribCOFINS(Produto $produto, Operacao $operacao)
-	{
-		$callback = $this->buscaTribFunctionCOFINS;
-		if(!$this->objetoParametroPesquisa)
-		{
-			$tributacaoCOFINS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
-			                              $this->dest->identificador);
-		}
-		else
-		{
-			$tributacaoCOFINS = $callback($produto, $operacao, $this->emit, $this->dest);
-		}
-		
-		return $tributacaoCOFINS;
-	}
-	
-	
-	private function getTribIPI(Produto $produto, Operacao $operacao)
-	{
-		
-		$callback = $this->buscaTribFunctionIPI;
-		
-		if(!$this->objetoParametroPesquisa)
-		{
-			return $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
-			                 $this->dest->identificador);
-		}
-		else
-		{
-			return $callback($produto, $operacao, $this->emit, $this->dest);
-		}
-	}
-	
-	
 	public function &addItem(Produto $produto, Operacao $operacao = null)
 	{
 		/* Algumas validacoes */
@@ -190,19 +86,19 @@ class DocumentoFiscal extends Base
 		}
 		if($this->emit->ContribuinteIPI === null)
 		{
-			throw new Exception('Informe se o Emitente é contribuinte do IPI');
+			throw new Exception('Informe se o Emitente Ã© contribuinte do IPI');
 		}
 		
 		if(empty($this->dest))
 		{
-			throw new Exception('Informe o Destinatário da nota fiscal antes de adicionar um produto');
+			throw new Exception('Informe o DestinatÃ¡rio da nota fiscal antes de adicionar um produto');
 		}
 		if(empty($this->operacao))
 		{
 			throw new Exception('Informe a Operacao da nota fiscal antes de adicionar um produto');
 		}
 		
-		/* se não informar uma operação específica ao adicionar um item usar a operação da nota */
+		/* se nÃ£o informar uma operaÃ§Ã£o especÃ­fica ao adicionar um item usar a operaÃ§Ã£o da nota */
 		if(empty($operacao))
 		{
 			$operacao = $this->operacao;
@@ -212,42 +108,42 @@ class DocumentoFiscal extends Base
 		{
 			if($produto->cMunFG === '')
 			{
-				throw new Exception("Deve ser informado o código do município do fato gerador do ISS na classe MotorFiscal\Produto para itens de serviço. Atual \"{$produto->cMunFG}\"");
+				throw new Exception("Deve ser informado o cÃ³digo do municÃ­pio do fato gerador do ISS na classe MotorFiscal\Produto para itens de serviÃ§o. Atual \"{$produto->cMunFG}\"");
 			}
 			
 			if($produto->cMun === '')
 			{
-				throw new Exception('Deve ser informado o código do município da incidência do ISS na classe MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado o cÃ³digo do municÃ­pio da incidÃªncia do ISS na classe MotorFiscal\Produto para itens de serviÃ§o');
 			}
 			
 			if($produto->cListServ === '')
 			{
-				throw new Exception('Deve ser informado o código do serviço (ABRASF) do ISS na classe MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado o cÃ³digo do serviÃ§o (ABRASF) do ISS na classe MotorFiscal\Produto para itens de serviÃ§o');
 			}
 			
 			if($produto->cServico === '')
 			{
-				throw new Exception('Deve ser informado o código do serviço(Município) do ISS na classe MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado o cÃ³digo do serviÃ§o(MunicÃ­pio) do ISS na classe MotorFiscal\Produto para itens de serviÃ§o');
 			}
 			
 			if($produto->cPais === '' && $produto->cMunFG == 9999999)
 			{
-				throw new Exception('Deve ser informado o código do pais para serviços internacionais na classe MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado o cÃ³digo do pais para serviÃ§os internacionais na classe MotorFiscal\Produto para itens de serviÃ§o');
 			}
 			
 			if($produto->indISS === '')
 			{
-				throw new Exception('Deve ser informado a exigibilidade do ISS (1 = Sim, 2 = Não) MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado a exigibilidade do ISS (1 = Sim, 2 = NÃ£o) MotorFiscal\Produto para itens de serviÃ§o');
 			}
 			
 			if($produto->indISS == 2 && $produto->nProcesso === '')
 			{
-				throw new Exception('Deve ser informado número do processo de inexigibilidade do ISSQN na classe MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado nÃºmero do processo de inexigibilidade do ISSQN na classe MotorFiscal\Produto para itens de serviÃ§o');
 			}
 			
 			if($produto->indIncentivo === '')
 			{
-				throw new Exception('Deve ser informado a existência de incentivo fiscal(1=Sim, 2=Não) na classe MotorFiscal\Produto para itens de serviço');
+				throw new Exception('Deve ser informado a existÃªncia de incentivo fiscal(1=Sim, 2=NÃ£o) na classe MotorFiscal\Produto para itens de serviÃ§o');
 			}
 		}
 		
@@ -259,7 +155,7 @@ class DocumentoFiscal extends Base
 		{
 			$item->imposto->ICMS = new ICMS();
 			
-			//se o emitente é contribuinte do IPI
+			//se o emitente Ã© contribuinte do IPI
 			if($this->emit->ContribuinteIPI)
 			{
 				$item->imposto->IPI = new IPI();
@@ -293,7 +189,7 @@ class DocumentoFiscal extends Base
 		if($produto->tipoItem === 0)
 		{
 			
-			/* ================= Calcula Tributação do IPI ============================== */
+			/* ================= Calcula TributaÃ§Ã£o do IPI ============================== */
 			if(isset($this->buscaTribFunctionIPI) && $this->emit->ContribuinteIPI)
 			{
 				$tributacaoIPI = $this->getTribIPI($produto, $operacao);
@@ -337,21 +233,21 @@ class DocumentoFiscal extends Base
 			
 			/* ============================= Calculo da Tributacao do ICMS =================== */
 			
-			//se for operação interestadual para consumidor final e o emitente não for simples nacional
+			//se for operaÃ§Ã£o interestadual para consumidor final e o emitente nÃ£o for simples nacional
 			/*****************************************************************
 			 * Conforme  liminar concedida pelo ministro Dias Toffoli        *
 			 * em 17/02/2016 empresas do simples nacional                    *
-			 * não estão obrigadas a realizar a partilha do ICMS             *
-			 * mas deverão preencher todos os campos na nota fiscal          *
+			 * nÃ£o estÃ£o obrigadas a realizar a partilha do ICMS             *
+			 * mas deverÃ£o preencher todos os campos na nota fiscal          *
 			 */
 			//Interestadual para consumidor final
 			if($this->emit->UF != $this->dest->UF && $this->ide->indFinal == 1)
 			{
 				$item->imposto->ICMSUFDest = new ICMSUFDest();
-				//Se não foi informado o ICMS para a UF de destino deve subir uma exceção
+				//Se nÃ£o foi informado o ICMS para a UF de destino deve subir uma exceÃ§Ã£o
 				if(!isset($tributacaoICMS->PercIcmsUFDest))
 				{
-					throw new Exception('Deve ser informada a alíquota de ICMS interestadual para operações com partilha de ICMS');
+					throw new Exception('Deve ser informada a alÃ­quota de ICMS interestadual para operaÃ§Ãµes com partilha de ICMS');
 				}
 			}
 			
@@ -376,14 +272,14 @@ class DocumentoFiscal extends Base
 			{/* Simples Nacional */
 				/* N12a */
 				$item->imposto->ICMS->CSOSN = $tributacaoICMS->CSOSN;
-				/* Base/valor ficto do ICMS para fins de substituição tributária */
+				/* Base/valor ficto do ICMS para fins de substituiÃ§Ã£o tributÃ¡ria */
 				$vBC_ICMS_FICTO = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vOutro
 				                  + $produto->vSeg;
 				
 				$item->imposto->ICMS->vICMS_Ficto = round($vBC_ICMS_FICTO * $tributacaoICMS->AliquotaICMS / 100, 2);
 				
 				$CST_ST = $item->imposto->ICMS->CSOSN;
-				/* Calcula valor de crédito do ICMS */
+				/* Calcula valor de crÃ©dito do ICMS */
 				$vBC_ICMS_CredSN = $produto->vProd - $produto->vDesc + $produto->vSeg + $produto->vOutro;
 				
 				if($tributacaoICMS->IncluirIPIBaseICMS && $this->emit->ContribuinteIPI)
@@ -431,7 +327,7 @@ class DocumentoFiscal extends Base
 				/* N12a */
 				$item->imposto->ICMS->CST = $tributacaoICMS->CST;
 				$CST_ST                   = $item->imposto->ICMS->CST;
-				/* Calcula valor de crédito do ICMS */
+				/* Calcula valor de crÃ©dito do ICMS */
 				switch($item->imposto->ICMS->CST)
 				{
 					case '00':
@@ -453,7 +349,7 @@ class DocumentoFiscal extends Base
 			if($tributacaoICMS->DestacarICMS == 1)
 			{
 				//Calculo da Partilha do ICMS
-				//se a propriedade ICMSUFDest não é nula
+				//se a propriedade ICMSUFDest nÃ£o Ã© nula
 				if($item->imposto->ICMSUFDest /* NA01 */)
 				{
 					$item->imposto->ICMSUFDest->vBCUFDest      = $item->imposto->ICMS->vICMS_Ficto;
@@ -497,7 +393,7 @@ class DocumentoFiscal extends Base
 				case '70':
 				case '90':
 					
-					/* ======= Se existe informacao válida de ICMS ST ========================== */
+					/* ======= Se existe informacao vÃ¡lida de ICMS ST ========================== */
 					if(!empty($tributacaoICMS->ModalidadeBaseICMSST) && $tributacaoICMS->ModalidadeBaseICMSST >= 0)
 					{
 						/* N18 */
@@ -520,7 +416,7 @@ class DocumentoFiscal extends Base
 							               + $produto->vOutro;
 							/* Incluindo IPI na base do ICMS-ST */
 							
-							//se o Emitente é contribuinte do IPI
+							//se o Emitente Ã© contribuinte do IPI
 							if($this->emit->ContribuinteIPI)
 							{
 								$vBC_ICMS_ST += (empty($item->imposto->IPI->vIPI)) ? 0 : $item->imposto->IPI->vIPI;
@@ -657,7 +553,7 @@ class DocumentoFiscal extends Base
 			unset($tributacaoISSQN);
 		}
 		
-		/* Busca as informações de Tributacao do PIS */
+		/* Busca as informaÃ§Ãµes de Tributacao do PIS */
 		
 		$tributacaoPIS                        = $this->getTribPIS($produto, $operacao);
 		
@@ -779,7 +675,7 @@ class DocumentoFiscal extends Base
 			{
 				$vBC_ICMS += $produto->vFrete;
 			}
-			//aplica MVA sobre ICMS próprio
+			//aplica MVA sobre ICMS prÃ³prio
 			if($item->imposto->ICMS->modBC == 0)
 			{
 				print_r($tributacaoICMS);
@@ -791,8 +687,8 @@ class DocumentoFiscal extends Base
 			$vBC_ICMS = $tributacaoICMS->ValorBaseICMS;
 		}
 		
-		//calcula a redução da base de calculo apenas para os casos
-		//que possuem redução de base de calculo.
+		//calcula a reduÃ§Ã£o da base de calculo apenas para os casos
+		//que possuem reduÃ§Ã£o de base de calculo.
 		if($item->imposto->ICMS->CST == '20'
 		   || $item->imposto->ICMS->CST == '51'
 		   || $item->imposto->ICMS->CST == '70'
@@ -829,7 +725,7 @@ class DocumentoFiscal extends Base
 			$item->imposto->ICMS->pICMS = $tributacaoICMS->AliquotaICMS;
 			
 			//Calculo da Partilha do ICMS
-			//se a propriedade ICMSUFDest não é nula
+			//se a propriedade ICMSUFDest nÃ£o Ã© nula
 			if($item->imposto->ICMSUFDest /* NA01 */)
 			{
 				$item->imposto->ICMSUFDest->vBCUFDest      = $item->imposto->ICMS->vBC;
@@ -962,31 +858,31 @@ class DocumentoFiscal extends Base
 				$this->ICMSTot->vPIS    += $item->imposto->PIS->vPIS;
 				$this->ICMSTot->vCOFINS += $item->imposto->COFINS->vCOFINS;
 				
-				//Totalização da partilha do ICMS
-				//se a propriedade ICMSUFDest não é nula
+				//TotalizaÃ§Ã£o da partilha do ICMS
+				//se a propriedade ICMSUFDest nÃ£o Ã© nula
 				if($item->imposto->ICMSUFDest)
 				{
 					
-					//inicializando variáveis
-					if($this->ICMSTot->vFCPUFDest == null)
+					//inicializando variÃ¡veis
+					if($this->ICMSTot->vFCPUFDest === null)
 					{
 						$this->ICMSTot->vFCPUFDest = 0;
 					}
-					if($this->ICMSTot->vICMSUFDest == null)
+					if($this->ICMSTot->vICMSUFDest === null)
 					{
 						$this->ICMSTot->vICMSUFDest = 0;
 					}
-					if($this->ICMSTot->vICMSUFRemet == null)
+					if($this->ICMSTot->vICMSUFRemet === null)
 					{
 						$this->ICMSTot->vICMSUFRemet = 0;
 					}
 					
-					//totalizando variáveis
+					//totalizando variÃ¡veis
 					$this->ICMSTot->vFCPUFDest   += $item->imposto->ICMSUFDest->vFCPUFDest;
 					$this->ICMSTot->vICMSUFDest  += $item->imposto->ICMSUFDest->vICMSUFDest;
 					$this->ICMSTot->vICMSUFRemet += $item->imposto->ICMSUFDest->vICMSUFRemet;
 				}
-				//Item de serviço
+				//Item de serviÃ§o
 			}
 			else
 			{
@@ -1013,7 +909,7 @@ class DocumentoFiscal extends Base
 		                      + $this->ICMSTot->vST + $this->ICMSTot->vFrete + $this->ICMSTot->vSeg
 		                      + $this->ICMSTot->vOutro + $this->ICMSTot->vII + $this->ICMSTot->vIPI;
 		
-		//Retenção de PIS, COFINS e CSLL - Contribuições
+		//RetenÃ§Ã£o de PIS, COFINS e CSLL - ContribuiÃ§Ãµes
 		if(($vRetPISServ + $vRetCOFINSServ + $vRetCSLLServ) <= 10)
 		{
 			$vRetPISServ    = 0;
@@ -1021,21 +917,21 @@ class DocumentoFiscal extends Base
 			$vRetCSLLServ   = 0;
 		}
 		
-		//Retenção de INSS
+		//RetenÃ§Ã£o de INSS
 		if(($vRetINSSServ) <= 10)
 		{
 			$vRetINSSServ  = 0;
 			$vBaseINSSServ = 0;
 		}
 		
-		//Retenção de IR
+		//RetenÃ§Ã£o de IR
 		if(($vRetIRServ) <= 10)
 		{
 			$vRetIRServ  = 0;
 			$vBaseIRServ = 0;
 		}
 		
-		$vTotOutroServ = $this->AjustarRetencaoServ($vRetPISServ + $vRetCOFINSServ + $vRetCSLLServ, $vRetIRServ,
+		$vTotOutroServ = $this->ajustarRetencaoServ($vRetPISServ + $vRetCOFINSServ + $vRetCSLLServ, $vRetIRServ,
 		                                            $vRetINSSServ);
 		
 		if($vISSQNServ > 0)
@@ -1070,7 +966,7 @@ class DocumentoFiscal extends Base
 	}
 	
 	
-	function AjustarRetencaoServ($contribuicoes, $ir, $inss)
+	public function ajustarRetencaoServ($contribuicoes, $ir, $inss)
 	{
 		$vOutroTot = 0;
 		foreach($this->itens as $key => $item)
@@ -1100,5 +996,110 @@ class DocumentoFiscal extends Base
 		
 		return $vOutroTot;
 	}
+	
+	
+	private function getTribISSQN(Produto $produto, Operacao $operacao)
+	{
+		$callback = $this->buscaTribFunctionISSQN;
+		if(!$this->objetoParametroPesquisa)
+		{
+			$tributacaoISSQN = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
+			                             $this->dest->identificador);
+		}
+		else
+		{
+			$tributacaoISSQN = $callback($produto, $operacao, $this->emit, $this->dest);
+		}
+		
+		return $tributacaoISSQN;
+	}
+	
+	
+	private function getTabelaIBPT(Produto $produto)
+	{
+		$callback = $this->buscaTribFunctionIBPT;
+		
+		if(!$this->objetoParametroPesquisa)
+		{
+			$tabelaIBPT = $callback($produto->identificador, $this->emit->identificador, $this->dest->identificador);
+		}
+		else
+		{
+			$tabelaIBPT = $callback($produto, $this->emit, $this->dest);
+		}
+		
+		return $tabelaIBPT;
+	}
+	
+	
+	private function getTribPIS(Produto $produto, Operacao $operacao)
+	{
+		$callback = $this->buscaTribFunctionPIS;
+		
+		if(!$this->objetoParametroPesquisa)
+		{
+			$tributacaoPIS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
+			                           $this->dest->identificador);
+		}
+		else
+		{
+			$tributacaoPIS = $callback($produto, $operacao, $this->emit, $this->dest);
+		}
+		
+		return $tributacaoPIS;
+	}
+	
+	
+	private function getTribICMS(Produto $produto, Operacao $operacao)
+	{
+		$callback = $this->buscaTribFunctionICMS;
+		/* pode pesquisar a tributaÃ§Ã£o do produto passando dados como parametros ou os objetos*/
+		if($this->objetoParametroPesquisa)
+		{
+			$tributacaoICMS = $callback($produto, $operacao, $this->emit, $this->dest);
+		}
+		else
+		{
+			$tributacaoICMS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
+			                            $this->dest->identificador);
+		}
+		
+		return $tributacaoICMS;
+	}
+	
+	
+	private function getTribCOFINS(Produto $produto, Operacao $operacao)
+	{
+		$callback = $this->buscaTribFunctionCOFINS;
+		if(!$this->objetoParametroPesquisa)
+		{
+			$tributacaoCOFINS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
+			                              $this->dest->identificador);
+		}
+		else
+		{
+			$tributacaoCOFINS = $callback($produto, $operacao, $this->emit, $this->dest);
+		}
+		
+		return $tributacaoCOFINS;
+	}
+	
+	
+	private function getTribIPI(Produto $produto, Operacao $operacao)
+	{
+		
+		$callback = $this->buscaTribFunctionIPI;
+		
+		if(!$this->objetoParametroPesquisa)
+		{
+			return $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
+			                 $this->dest->identificador);
+		}
+		else
+		{
+			return $callback($produto, $operacao, $this->emit, $this->dest);
+		}
+	}
+	
 	
 }

@@ -3,7 +3,7 @@
 namespace MotorFiscal;
 
 /**
- * Classe com todas as infromações do destinatario
+ * Classe com todas as infromaÃ§Ãµes do destinatario
  */
 class Emitente extends Base
 {
