@@ -1,7 +1,6 @@
 <?php
 
 namespace MotorFiscal;
-require_once "class.motor.base.php";
 
 class Operacao extends Base
 {

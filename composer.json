@@ -10,5 +10,10 @@
     }
   ],
   "minimum-stability": "alpha",
-  "require": {}
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "MotorFiscal\\": "src"
+    }
+  }
 }

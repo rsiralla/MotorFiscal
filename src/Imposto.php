@@ -1,76 +1,62 @@
 <?php
 
 namespace MotorFiscal;
-require_once "class.motor.base.php";
-require_once "class.motor.icms.php";
-require_once "class.motor.ipi.php";
-require_once "class.motor.issqn.php";
-require_once "class.motor.piscofins.php";
-
 
 class Imposto extends Base
 {
-	public function __construct()
-	{
-		$this->ICMSUFDest = null;
-	}
-	
-	
 	/**
 	 * NF-e/NFC-e :M02 - vTotTrib
 	 */
-	Public $vTotTrib;
+	public $vTotTrib;
 	/**
 	 * vTotTribFederal
 	 */
-	Public $vTotTribFederal;
-	
+	public $vTotTribFederal;
 	/**
 	 * vTotTribEstadual
 	 */
-	Public $vTotTribEstadual;
-	
+	public $vTotTribEstadual;
 	/**
 	 * vTotTribMunicipal
 	 */
-	Public $vTotTribMunicipal;
-	
+	public $vTotTribMunicipal;
 	/**
 	 * NF-e/NFC-e :N01 - ICMS
 	 * @var \MotorFiscal\ICMS
 	 */
-	Public $ICMS;
+	public $ICMS;
 	/**
 	 * NF-e/NFC-e :NA01 - ICMSUFDest
 	 * @var \MotorFiscal\ICMSUFDest
 	 */
 	
-	Public $ICMSUFDest;
-	
+	public $ICMSUFDest;
 	/**
 	 * NF-e/NFC-e :O01 - IPI
 	 */
-	Public $IPI;
-	
+	public $IPI;
 	/**
 	 * NF-e/NFC-e :P01 - II
 	 */
-	Public $II;
-	
+	public $II;
 	/**
 	 * NF-e/NFC-e :Q01 - PIS
 	 */
-	Public $PIS;
-	
+	public $PIS;
 	/**
 	 * NF-e/NFC-e :S01 - COFINS
 	 */
-	Public $COFINS;
-	
+	public $COFINS;
 	/**
 	 * NF-e/NFC-e :U01 - ISSQN
 	 */
-	Public $ISSQN;
+	public $ISSQN;
+	
+	
+	public function __construct()
+	{
+		$this->ICMSUFDest = null;
+	}
 	
 }
 

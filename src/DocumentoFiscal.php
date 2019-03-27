@@ -6,36 +6,28 @@ namespace MotorFiscal;
   vUnidTribIPI
  */
 
-require_once "class.motor.base.php";
-require_once "class.motor.emitente.php";
-require_once "class.motor.destinatario.php";
-require_once "class.motor.imposto.php";
-require_once "class.motor.produto.php";
-require_once "class.motor.operacao.php";
-require_once "class.motor.icmstot.php";
-require_once "class.motor.icmsufdest.php";
-require_once "class.motor.rettrib.php";
-require_once "class.motor.ide.php";
-require_once "class.motor.itemfiscal.php";
-
+use MotorFiscal\Estadual\ICMS;
+use MotorFiscal\Estadual\ICMSTot;
+use MotorFiscal\Estadual\ICMSUFDest;
+use MotorFiscal\Federal\COFINS;
+use MotorFiscal\Federal\IPI;
+use MotorFiscal\Federal\PIS;
+use MotorFiscal\Federal\RetTrib;
+use MotorFiscal\Municipal\ISSQN;
 
 class DocumentoFiscal extends Base
 {
 	
 	/**
-	 * @var \MotorFiscal\Operacao
-	 */
-	protected $operacao;
-	/**
-	 * @var \MotorFiscal\ICMSTot
+	 * @var \MotorFiscal\Estadual\ICMSTot
 	 */
 	public $ICMSTot;
 	/**
-	 * @var \MotorFiscal\ISSQN
+	 * @var \MotorFiscal\Municipal\ISSQN
 	 */
 	public $ISSQNtot;
 	/**
-	 * @var \MotorFiscal\retTrib
+	 * @var \MotorFiscal\Federal\RetTrib
 	 */
 	public $retTrib;
 	/**
@@ -50,11 +42,24 @@ class DocumentoFiscal extends Base
 	 * @var \MotorFiscal\IdentificacaoNFe
 	 */
 	public $ide;
-	
-	
 	public $itens = null;
+	public $buscaTribFunction;
+	public $buscaTribFunctionIBPT;
+	public $buscaTribFunctionIPI;
 	
-	private $objetoParametroPesquisa = false;
+	
+	/*
+	  Função para calcular a tributação do produto
+	 */
+	public $buscaTribFunctionICMS;
+	public $buscaTribFunctionPIS;
+	public $buscaTribFunctionCOFINS;
+	public $buscaTribFunctionISSQN;
+	/**
+	 * @var \MotorFiscal\Operacao
+	 */
+	protected $operacao;
+	private   $objetoParametroPesquisa = false;
 	
 	
 	public function __construct(Emitente $emitente,
@@ -74,19 +79,6 @@ class DocumentoFiscal extends Base
 		$this->ide->natOp              = $operacao->NaturezaOperacao;
 		$this->objetoParametroPesquisa = $objetoParametroPesquisa;
 	}
-	
-	
-	/*
-	  Função para calcular a tributação do produto
-	 */
-	
-	public $buscaTribFunction;
-	public $buscaTribFunctionIBPT;
-	public $buscaTribFunctionIPI;
-	public $buscaTribFunctionICMS;
-	public $buscaTribFunctionPIS;
-	public $buscaTribFunctionCOFINS;
-	public $buscaTribFunctionISSQN;
 	
 	
 	public function &addItem(Produto $produto, Operacao $operacao = null)
@@ -164,21 +156,21 @@ class DocumentoFiscal extends Base
 		$item->imposto  = new Imposto();
 		if($produto->tipoItem === 0)
 		{
-			$item->imposto->ICMS = new ICMS;
+			$item->imposto->ICMS = new ICMS();
 			
 			//se o emitente é contribuinte do IPI
 			if($this->emit->ContribuinteIPI)
 			{
-				$item->imposto->IPI = new IPI;
+				$item->imposto->IPI = new IPI();
 			}
 		}
 		else
 		{
-			$item->imposto->ISSQN = new ISSQN;
+			$item->imposto->ISSQN = new ISSQN();
 		}
 		
-		$item->imposto->PIS    = new PIS;
-		$item->imposto->COFINS = new COFINS;
+		$item->imposto->PIS    = new PIS();
+		$item->imposto->COFINS = new COFINS();
 		
 		/* ================= Calcula Percentual Tributacao ============================== */
 		if(isset($this->buscaTribFunctionIBPT))
@@ -269,7 +261,7 @@ class DocumentoFiscal extends Base
 			if($this->emit->UF != $this->dest->UF//interestadual
 			   && $this->ide->indFinal == 1)
 			{//não é consumidor final
-				$item->imposto->ICMSUFDest = new ICMSUFDest;
+				$item->imposto->ICMSUFDest = new ICMSUFDest();
 				
 				//Se não foi informado o ICMS para a UF de destino deve subir uma exceção
 				if(!isset($tributacaoICMS->PercIcmsUFDest))
@@ -544,7 +536,7 @@ class DocumentoFiscal extends Base
 			}
 			
 			unset($buscaTribFunctionISSQN);
-			$item->imposto->ISSQN = new ISSQN;
+			$item->imposto->ISSQN = new ISSQN();
 			
 			//Calculo dos impostos
 			$desc                               = (empty($produto->vDesc)) ? 0 : $produto->vDesc;
@@ -1021,7 +1013,7 @@ class DocumentoFiscal extends Base
 		$vRet = $vRetPISServ + $vRetCOFINSServ + $vRetCSLLServ + $vRetINSSServ + $vRetIRServ;
 		if($vRet > 0)
 		{
-			$this->retTrib             = new retTrib();
+			$this->retTrib             = new RetTrib();
 			$this->retTrib->vRetPIS    = $vRetPIS;
 			$this->retTrib->vRetCOFINS = $vRetCOFINS;
 			$this->retTrib->vRetCSLL   = $vRetCSLLServ;

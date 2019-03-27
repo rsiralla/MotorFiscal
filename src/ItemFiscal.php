@@ -2,8 +2,6 @@
 
 namespace MotorFiscal;
 
-require_once "class.motor.base.php";
-
 /**
  * Classe representada pelo item H01 da NF-e/NFC-e
  */
@@ -18,19 +16,19 @@ Class ItemFiscal extends Base
 	/**
 	 * NF-e/NFC-e :I01 - prod
 	 */
-	Public $prod;
+	public $prod;
 	/**
 	 * NF-e/NFC-e :H02 - nItem
 	 */
-	Public $nItem;
+	public $nItem;
 	/**
 	 * NF-e/NFC-e :W02 - ICMSTot
 	 */
-	Public $ICMSTot;
+	public $ICMSTot;
 	/**
 	 * Operação do Item da Nota Fiscal
 	 */
-	Public  $Operacao;
+	public  $Operacao;
 	private $tipoItem = 0;
 	
 	

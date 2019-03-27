@@ -1,6 +1,6 @@
 <?php
 
-namespace MotorFiscal;
+namespace MotorFiscal\Estadual;
 
 /**
  * Class ICMSTot
@@ -11,78 +11,78 @@ class ICMSTot extends Base
 	/**
 	 * NF-e/NFC-e :W03 - vBC
 	 */
-	Public $vBC;
+	public $vBC;
 	/**
 	 * NF-e/NFC-e :W04 - vICMS
 	 */
-	Public $vICMS;
+	public $vICMS;
 	/**
 	 * NF-e/NFC-e :W04a - vICMSDeson
 	 */
-	Public $vICMSDeson;
+	public $vICMSDeson;
 	/**
 	 * NF-e/NFC-e :W04c - vFCPUFDest
 	 */
-	Public $vFCPUFDest;
+	public $vFCPUFDest;
 	/**
 	 * NF-e/NFC-e :W04e - vICMSUFDest
 	 */
-	Public $vICMSUFDest;
+	public $vICMSUFDest;
 	/**
 	 * NF-e/NFC-e :W04g - vICMSUFRemet
 	 */
-	Public $vICMSUFRemet;
+	public $vICMSUFRemet;
 	
 	/**
 	 * NF-e/NFC-e :W05 - vBCST
 	 */
-	Public $vBCST;
+	public $vBCST;
 	/**
 	 * NF-e/NFC-e :W06 - vST
 	 */
-	Public $vST;
+	public $vST;
 	/**
 	 * NF-e/NFC-e :W07 - vProd
 	 */
-	Public $vProd;
+	public $vProd;
 	/**
 	 * NF-e/NFC-e :W08 - vFrete
 	 */
-	Public $vFrete;
+	public $vFrete;
 	/**
 	 * NF-e/NFC-e :W09 - vSeg
 	 */
-	Public $vSeg;
+	public $vSeg;
 	/**
 	 * NF-e/NFC-e :W10 - vDesc
 	 */
-	Public $vDesc;
+	public $vDesc;
 	/**
 	 * NF-e/NFC-e :W11 - vII
 	 */
-	Public $vII;
+	public $vII;
 	/**
 	 * NF-e/NFC-e :W12 - vIPI
 	 */
-	Public $vIPI;
+	public $vIPI;
 	/**
 	 * NF-e/NFC-e :W13 - vPIS
 	 */
-	Public $vPIS;
+	public $vPIS;
 	/**
 	 * NF-e/NFC-e :W14 - vCOFINS
 	 */
-	Public $vCOFINS;
+	public $vCOFINS;
 	/**
 	 * NF-e/NFC-e :W15 - vOutro
 	 */
-	Public $vOutro;
+	public $vOutro;
 	/**
 	 * NF-e/NFC-e :W16 - vNF
 	 */
-	Public $vNF;
+	public $vNF;
 	/**
 	 * NF-e/NFC-e :W16a - vTotTrib
 	 */
-	Public $vTotTrib;
+	public $vTotTrib;
 }
