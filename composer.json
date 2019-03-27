@@ -1,18 +1,19 @@
 {
 	"name": "jonatas-fischer/motor-fiscal",
-	"description": "Classes para auxiliar no calculo de notas fiscais",
+	"description": "Classes para auxiliar no cálculo de notas fiscais",
 	"type": "library",
 	"license": "0BSD",
+	"version": "1.0.0-alpha",
 	"authors": [
 		{
 			"name": "Jonatas Fischer",
 			"email": "jonatas.fischer@hotmail.com"
 		}
 	],
-	"minimum-stability": "alpha",
+	"minimum-stability": "stable",
 	"require": {},
 	"require-dev": {
-		"phpunit/phpunit": "^8.0"
+		"phpunit/phpunit": "^7.0"
 	},
 	"autoload": {
 		"psr-4": {

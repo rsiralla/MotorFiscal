@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . '/../bootstrap.php';
-
 use MotorFiscal\Destinatario;
 use MotorFiscal\DocumentoFiscal;
 use MotorFiscal\Emitente;
