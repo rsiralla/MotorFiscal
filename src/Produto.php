@@ -6,11 +6,10 @@ namespace MotorFiscal;
  */
 Class Produto extends Base
 {
-	public $TipoTributacaoIPI = 0;
-	//Vari�veis para calculo do ISSQN
-	public $TipoTributacaoPISCOFINS = 0;
-	public $OrigemMercadoria        = 0;
-	public $FormaAquisicao          = 0;
+	protected $TipoTributacaoIPI       = 0;
+	protected $TipoTributacaoPISCOFINS = 0;
+	protected $OrigemMercadoria        = 0;
+	protected $FormaAquisicao          = 0;
 	/**
 	 * NF-e/NFC-e :I02 - cProd
 	 */
@@ -54,7 +53,7 @@ Class Produto extends Base
 	 */
 	public $vUnCom = 0; /*0 = Aliquota; 1 = Quantidade*/
 	/**
-	 * NF-e/NFC-e :I05c - CEST - Código CEST
+	 * NF-e/NFC-e :I05c - CEST - CÃ³digo CEST
 	 */
 	public $CEST; /*0 = Aliquota; 1 = Quantidade*/
 	/**

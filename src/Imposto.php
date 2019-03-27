@@ -22,7 +22,7 @@ class Imposto extends Base
 	public $vTotTribMunicipal;
 	/**
 	 * NF-e/NFC-e :N01 - ICMS
-	 * @var \MotorFiscal\ICMS
+	 * @var \MotorFiscal\Estadual\ICMS
 	 */
 	public $ICMS;
 	/**

@@ -268,6 +268,7 @@ class DocumentoFiscal extends Base
 			
 			/* N11 */
 			$item->imposto->ICMS->orig = $produto->OrigemMercadoria;
+			
 			if($this->emit->CRT == 1)
 			{/* Simples Nacional */
 				/* N12a */
@@ -278,7 +279,6 @@ class DocumentoFiscal extends Base
 				
 				$item->imposto->ICMS->vICMS_Ficto = round($vBC_ICMS_FICTO * $tributacaoICMS->AliquotaICMS / 100, 2);
 				
-				$CST_ST = $item->imposto->ICMS->CSOSN;
 				/* Calcula valor de crédito do ICMS */
 				$vBC_ICMS_CredSN = $produto->vProd - $produto->vDesc + $produto->vSeg + $produto->vOutro;
 				
@@ -326,7 +326,7 @@ class DocumentoFiscal extends Base
 			{
 				/* N12a */
 				$item->imposto->ICMS->CST = $tributacaoICMS->CST;
-				$CST_ST                   = $item->imposto->ICMS->CST;
+
 				/* Calcula valor de crédito do ICMS */
 				switch($item->imposto->ICMS->CST)
 				{
@@ -379,6 +379,7 @@ class DocumentoFiscal extends Base
 			}
 			
 			/* Calcula do ICMS-ST */
+			$CST_ST = $item->imposto->ICMS->CST ? : $item->imposto->ICMS->CSOSN;
 			switch($CST_ST)
 			{
 				case '101':
