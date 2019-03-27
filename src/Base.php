@@ -7,10 +7,20 @@ namespace MotorFiscal;
  */
 class Base
 {
-	public    $customInfo   = array();
-	protected $externalProp = array();
+	/**
+	 * @var array
+	 */
+	public $customInfo = [];
+	
+	/**
+	 * @var array
+	 */
+	protected $externalProp = [];
 	
 	
+	/**
+	 * @param $obj
+	 */
 	public function assign($obj)
 	{
 		foreach($this->externalProp as $property)
@@ -23,16 +33,12 @@ class Base
 	}
 	
 	
-	public function __setAll($obj)
-	{
-		foreach($obj as $key => $value)
-		{
-			$this->__set($key, $value);
-		}
-	}
-	
-	
-	public function __get($name)
+	/**
+	 * @param $name
+	 *
+	 * @return mixed
+	 */
+	function __get($name)
 	{
 		if(property_exists($this, $name))
 		{
@@ -44,11 +50,16 @@ class Base
 			trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] . ' on line '
 			              . $trace[0]['line'], E_USER_NOTICE);
 			
-			return null;
 		}
 	}
 	
 	
+	/**
+	 * @param $name
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
 	public function __set($name, $value)
 	{
 		
@@ -62,8 +73,18 @@ class Base
 			trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] . ' on line '
 			              . $trace[0]['line'], E_USER_NOTICE);
 			
-			return null;
 		}
+	}
+	
+	
+	/**
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	public function __isset($name)
+	{
+		return property_exists($this, $name);
 	}
 	
 }
