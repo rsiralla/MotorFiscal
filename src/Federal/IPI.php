@@ -2,6 +2,8 @@
 
 namespace MotorFiscal\Federal;
 
+use MotorFiscal\Base;
+
 /**
  * Classe com todas as informações para escrituração do IPI
  */

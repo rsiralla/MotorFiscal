@@ -8,6 +8,8 @@
 
 namespace MotorFiscal\Federal;
 
+use MotorFiscal\Base;
+
 class COFINS extends Base
 {
 	

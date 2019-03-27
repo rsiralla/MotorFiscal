@@ -2,6 +2,8 @@
 
 namespace MotorFiscal\Municipal;
 
+use MotorFiscal\Base;
+
 /**
  * Classe com todas as informações para escrituração do ISSQN
  */
@@ -34,7 +36,7 @@ class ISSQN extends Base
 	/**
 	 * NF-e/NFC-e : U07 - vDeducao
 	 */
-	public $vDeducao;
+	public $vDeducao = 0;
 	/**
 	 * NF-e/NFC-e : U08 - vOutro
 	 */
@@ -42,7 +44,7 @@ class ISSQN extends Base
 	/**
 	 * NF-e/NFC-e : U09 - vDescIncond
 	 */
-	public $vDescIncond;
+	public $vDescIncond = 0;
 	/**
 	 * NF-e/NFC-e : U10 - vDescCond
 	 */
@@ -75,7 +77,7 @@ class ISSQN extends Base
 	 * NF-e/NFC-e : U17 - indIncentivo
 	 */
 	public    $indIncentivo;
-	protected $vRetPIS    = 0;
+	protected $vRetPIS = 0;
 	protected $vRetCOFINS = 0;
 	protected $vRetIR     = 0;
 	protected $vRetCSLL   = 0;

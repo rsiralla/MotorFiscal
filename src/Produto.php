@@ -112,7 +112,7 @@ Class Produto extends Base
 	protected $indISS       = '';
 	protected $nProcesso    = '';
 	protected $indIncentivo = '';
-	protected $vDeducao     = '';
-	protected $vDescIncond  = '';
-	protected $vDescCond    = '';
+	protected $vDeducao     = 0;
+	protected $vDescIncond  = 0;
+	protected $vDescCond    = 0;
 }

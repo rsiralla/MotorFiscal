@@ -2,6 +2,8 @@
 
 namespace MotorFiscal\Federal;
 
+use MotorFiscal\Base;
+
 class RetTrib extends Base
 {
 	

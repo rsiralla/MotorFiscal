@@ -2,6 +2,8 @@
 
 namespace MotorFiscal\Estadual;
 
+use MotorFiscal\Base;
+
 /**
  * Class ICMSTot
  * @package MotorFiscal

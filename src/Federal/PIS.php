@@ -2,6 +2,8 @@
 
 Namespace MotorFiscal\Federal;
 
+use MotorFiscal\Base;
+
 class PIS extends Base
 {
 	

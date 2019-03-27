@@ -59,7 +59,7 @@ class DocumentoFiscal extends Base
 	 * @var \MotorFiscal\Operacao
 	 */
 	protected $operacao;
-	private   $objetoParametroPesquisa = false;
+	protected $objetoParametroPesquisa = false;
 	
 	
 	public function __construct(Emitente $emitente,
@@ -374,7 +374,7 @@ class DocumentoFiscal extends Base
 					case '51':
 					case '70':
 					case '90':
-						$this->calcularTributacaoIntegral();
+						$this->calcularTributacaoIntegral($item, $tributacaoICMS, $produto);
 						
 						break;
 				}
