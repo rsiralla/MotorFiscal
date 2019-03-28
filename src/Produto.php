@@ -6,6 +6,8 @@ namespace MotorFiscal;
  */
 Class Produto extends Base
 {
+    const SERVICO = 1;
+    const PRODUTO = 0;
 	protected $TipoTributacaoIPI       = 0;
 	protected $TipoTributacaoPISCOFINS = 0;
 	protected $OrigemMercadoria        = 0;
@@ -92,7 +94,9 @@ Class Produto extends Base
 	/**
 	 * NF-e/NFC-e :I17 - vDesc
 	 */
-	public $vDesc = 0;
+    public $vDesc = 0.00;
+
+
 	/**
 	 * NF-e/NFC-e :I17a - vOutro
 	 */
@@ -105,7 +109,7 @@ Class Produto extends Base
 	protected $cMunFG       = '';
 	protected $cMun         = '';
 	protected $cPais        = '';
-	protected $tipoItem     = 0;
+    protected $tipoItem = self::PRODUTO;
 	protected $cListServ    = '';
 	protected $cServico     = '';
 	protected $indISS       = '';
@@ -114,4 +118,22 @@ Class Produto extends Base
 	protected $vDeducao     = 0;
 	protected $vDescIncond  = 0;
 	protected $vDescCond    = 0;
+
+    public function vDesc()
+    {
+        return (empty($this->vDesc)) ? 0.00 : $this->vDesc;
+    }
+
+    public function vDeducao()
+    {
+        return (empty($this->vDeducao)) ? 0.00 : $this->vDeducao;
+    }
+
+    public function tipoItem()
+    {
+        return $this->tipoItem;
+    }
+
+
+
 }

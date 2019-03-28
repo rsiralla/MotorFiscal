@@ -284,7 +284,7 @@ class DocumentoFiscalRpaTest extends TestCase
 		$operacao->indPres                     = 0;
 		$operacao->NaturezaOperacao            = 'Venda a consumidor final';
 		$this->NF                              = new DocumentoFiscal($emitente, $destinatario, $operacao);
-		$this->NF->objetoParametroPesquisa     = true;
+        $this->NF->tipoParametroPesquisa = true;
 		
 		$this->NF->buscaTribFunctionICMS = function (Produto $produto,
 		                                             Operacao $operacao,

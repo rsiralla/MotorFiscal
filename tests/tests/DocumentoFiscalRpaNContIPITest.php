@@ -241,9 +241,9 @@ class DocumentoFiscalRpaNContIPITest extends TestCase
 			return Trib::COFINS($produto->identificador, $operacao->identificador, $emitente->identificador,
 			                    $destinatario->identificador);
 		};
-		
-		$this->NF->objetoParametroPesquisa = true;
-		$this->NF->buscaTribFunctionIBPT   = function ($produto) {
+
+        $this->NF->tipoParametroPesquisa = true;
+        $this->NF->buscaTribFunctionIBPT = function ($produto) {
 			if($produto->tipoItem == 0)
 			{
 				$ret              = new \stdClass();

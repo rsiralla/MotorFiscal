@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.0/phpunit.xsd"
-         bootstrap="tests/lightweight.bootstrap.inc.php"
-         forceCoversAnnotation="false"
-         beStrictAboutCoversAnnotation="true"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         verbose="true">
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.5/phpunit.xsd"
+		 bootstrap="tests/bootstrap.php"
+		 beStrictAboutCoversAnnotation="true"
+		 beStrictAboutOutputDuringTests="true"
+		 beStrictAboutTodoAnnotatedTests="true"
+		 verbose="true">
 	
 	<!-- PHPUnit Test Suites -->
 	<testsuites>
@@ -21,7 +20,7 @@
 	
 	<!-- PHPUnit filter for code coverage -->
 	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="false">
+		<whitelist>
 			<directory suffix=".php">src</directory>
 		</whitelist>
 	</filter>

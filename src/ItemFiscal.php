@@ -2,41 +2,73 @@
 
 namespace MotorFiscal;
 
+use MotorFiscal\Estadual\ICMS;
+use MotorFiscal\Federal\COFINS;
+use MotorFiscal\Federal\IPI;
+use MotorFiscal\Federal\PIS;
+use MotorFiscal\Municipal\ISSQN;
+
 /**
  * Classe representada pelo item H01 da NF-e/NFC-e
  */
 Class ItemFiscal extends Base
 {
-	
-	// 0 = Produto; 1 = Serviço
-	/**
-	 * NF-e/NFC-e :M01 - imposto
-	 */
-	public $imposto;
-	/**
-	 * NF-e/NFC-e :I01 - prod
-	 */
-	public $prod;
-	/**
-	 * NF-e/NFC-e :H02 - nItem
-	 */
-	public $nItem;
-	/**
-	 * NF-e/NFC-e :W02 - ICMSTot
-	 */
-	public $ICMSTot;
-	/**
-	 * Operação do Item da Nota Fiscal
-	 */
-	public  $Operacao;
-	private $tipoItem = 0;
-	
-	
-	public function __construct()
-	{
-		$this->imposto  = new Imposto;
-		$this->prod     = new Produto;
-		$this->Operacao = new Operacao;
-	}
-	
+
+    // 0 = Produto; 1 = Serviço
+    /**
+     * NF-e/NFC-e :M01 - imposto
+     */
+    public $imposto;
+
+    /**
+     * NF-e/NFC-e :I01 - prod
+     * @var Produto
+     */
+    public $prod;
+    /**
+     * NF-e/NFC-e :H02 - nItem
+     */
+    public $nItem;
+    /**
+     * NF-e/NFC-e :W02 - ICMSTot
+     */
+    public $ICMSTot;
+    /**
+     * Operação do Item da Nota Fiscal
+     */
+    public $Operacao;
+    private $tipoItem = 0;
+
+
+    private function __construct()
+    {
+
+    }
+
+    public static function criarItemFiscal(Produto $produto, Operacao $operacao, DocumentoFiscal $documento)
+    {
+        $item           = new ItemFiscal();
+        $item->Operacao = $operacao;
+        $item->prod     = $produto;
+        $item->imposto  = new Imposto();
+
+        if ($produto->tipoItem === Produto::PRODUTO) {
+            $item->imposto->ICMS = new ICMS();
+
+            //se o emitente é contribuinte do IPI
+            if ($documento->emit->ContribuinteIPI) {
+                $item->imposto->IPI = new IPI();
+            }
+        } else {
+            $item->imposto->ISSQN = new ISSQN();
+
+        }
+
+        $item->imposto->PIS    = new PIS();
+        $item->imposto->COFINS = new COFINS();
+
+        return $item;
+
+    }
+
 }

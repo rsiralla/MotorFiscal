@@ -94,8 +94,8 @@ class DocumentoFiscalSimplesTest extends TestCase
 		$operacao->CFOPProduto                 = 1;
 		$operacao->CFOPProdutoST               = 1;
 		$this->NF                              = new DocumentoFiscal($emitente, $destinatario, $operacao);
-		
-		$this->NF->objetoParametroPesquisa = true;
+
+        $this->NF->tipoParametroPesquisa = true;
 		
 		$this->NF->buscaTribFunctionICMS = function (Produto $produto,
 		                                             Operacao $operacao,
