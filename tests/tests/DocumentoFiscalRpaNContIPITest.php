@@ -35,7 +35,6 @@ class DocumentoFiscalRpaNContIPITest extends TestCase
 		$prod->vFrete            = 10;
 		$prod->vOutro            = 10;
 		$prod->vSeg              = 10;
-		$this->NF->itens         = array();
 		$item                    = &$this->NF->addItem($prod);
 		$this->NF->totalizarDocumento();
 		$this->assertEquals('00', $item->imposto->ICMS->CST, "CST");
@@ -241,19 +240,19 @@ class DocumentoFiscalRpaNContIPITest extends TestCase
 			return Trib::COFINS($produto->identificador, $operacao->identificador, $emitente->identificador,
 			                    $destinatario->identificador);
 		};
-
-        $this->NF->tipoParametroPesquisa = true;
+		
+		$this->NF->tipoParametroPesquisa = DocumentoFiscal::OBJETO;
         $this->NF->buscaTribFunctionIBPT = function ($produto) {
 			if($produto->tipoItem == 0)
 			{
-				$ret              = new \stdClass();
+				$ret              = new stdClass();
 				$ret->PercTribFed = 10;
 				$ret->PercTribEst = 10;
 				$ret->PercTribMun = 0;
 			}
 			else
 			{
-				$ret              = new \stdClass();
+				$ret              = new stdClass();
 				$ret->PercTribFed = 10;
 				$ret->PercTribEst = 0;
 				$ret->PercTribMun = 15;
@@ -263,7 +262,7 @@ class DocumentoFiscalRpaNContIPITest extends TestCase
 		};
 		
 		$this->NF->buscaTribFunctionISSQN = function ($produto) {
-			$ret           = new \stdClass();
+			$ret           = new stdClass();
 			$ret->Aliquota = 15;
 			//Reten��o de ISS
 			$ret->ISSRetemPF       = true;
