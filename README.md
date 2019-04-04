@@ -7,7 +7,6 @@ Os chamados abertos (issues) serão atentidos tãologo quanto possível. Caso ha
 
 ## Utilização
 Dento da pasta tests existem exemplos de diversos calculos de notas fiscais para empresas optantes pelo simples nacional e empresas RPA. Abaixo segue um breve exemplo de como utilizar a classe:
-```
 ```php
 <?php
 ...
@@ -160,5 +159,5 @@ $item = &$nf->addItem($prod);
 $nf->totalizarDocumento();
 
 ```
-** Para maiores exemplos favor verificar a pasta de testes **
+**Para maiores exemplos favor verificar a pasta de testes**
 
