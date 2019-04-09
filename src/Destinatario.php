@@ -6,7 +6,7 @@ namespace MotorFiscal;
  */
 class Destinatario extends Base
 {
-	protected $identificador;
+	public $identificador;
 	
 	/**
 	 * NF-e/NFC-e :E02 - CNPJ

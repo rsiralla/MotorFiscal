@@ -176,6 +176,8 @@ class DocumentoFiscal extends Base
 			
 			/* ============================= Calculo da Tributacao do ICMS =================== */
 			
+			$tributacaoICMS = $this->getTribICMS($produto, $operacao);
+			
 			//se for operação interestadual para consumidor final e o emitente não for simples nacional
 			/*****************************************************************
 			 * Conforme  liminar concedida pelo ministro Dias Toffoli        *
@@ -193,9 +195,7 @@ class DocumentoFiscal extends Base
 					throw new Exception('Deve ser informada a alíquota de ICMS interestadual para operações com partilha de ICMS');
 				}
 			}
-			
-			$tributacaoICMS = $this->getTribICMS($produto, $operacao);
-			
+
 			$item->imposto->ICMS->assign($tributacaoICMS);
 			
 			if($produto->FormaAquisicao == 1)

@@ -4,18 +4,18 @@ namespace MotorFiscal;
 
 class Operacao extends Base
 {
-	protected $identificador;
-	protected $CFOPMercadoria;
-	protected $NaturezaOperacao;/*Descrição*/
-	protected $CFOPMercadoriaST;
-	protected $CFOPMercadoriaSTSubstituido;
-	protected $CFOPProduto;
-	protected $CFOPProdutoST;
-	protected $TipoOperacao;
-	protected $identificacao;
-	protected $finalidade;
-	protected $indFinal;
-	protected $indPres;
+	public $identificador;
+	public $CFOPMercadoria;
+	public $NaturezaOperacao;/*Descrição*/
+	public $CFOPMercadoriaST;
+	public $CFOPMercadoriaSTSubstituido;
+	public $CFOPProduto;
+	public $CFOPProdutoST;
+	public $TipoOperacao;
+	public $identificacao;
+	public $finalidade;
+	public $indFinal;
+	public $indPres;
 	
 	
 	public function isDevolucao($cfop)

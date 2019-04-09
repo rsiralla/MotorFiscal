@@ -6,10 +6,10 @@ namespace MotorFiscal;
  */
 Class Produto extends Base
 {
-	protected $TipoTributacaoIPI       = 0;
-	protected $TipoTributacaoPISCOFINS = 0;
-	protected $OrigemMercadoria        = 0;
-	protected $FormaAquisicao          = 0;
+	public $TipoTributacaoIPI       = 0;
+	public $TipoTributacaoPISCOFINS = 0;
+	public $OrigemMercadoria        = 0;
+	public $FormaAquisicao          = 0;
 	/**
 	 * NF-e/NFC-e :I02 - cProd
 	 */
