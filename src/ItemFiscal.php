@@ -7,6 +7,7 @@ use MotorFiscal\Federal\COFINS;
 use MotorFiscal\Federal\IPI;
 use MotorFiscal\Federal\PIS;
 use MotorFiscal\Municipal\ISSQN;
+use MotorFiscal\Estadual\ICMSTot;
 
 /**
  * Classe representada pelo item H01 da NF-e/NFC-e
@@ -26,16 +27,21 @@ Class ItemFiscal extends Base
      * @var Produto
      */
     public $prod;
+    
     /**
      * NF-e/NFC-e :H02 - nItem
      */
     public $nItem;
+
     /**
      * NF-e/NFC-e :W02 - ICMSTot
+     * @var ICMSTot
      */
     public $ICMSTot;
+    
     /**
      * Operação do Item da Nota Fiscal
+     * 
      */
     public $Operacao;
     private $tipoItem = 0;
