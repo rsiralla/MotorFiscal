@@ -17,6 +17,7 @@ Class ItemFiscal extends Base
     // 0 = Produto; 1 = Serviço
     /**
      * NF-e/NFC-e :M01 - imposto
+     * @var Imposto
      */
     public $imposto;
 

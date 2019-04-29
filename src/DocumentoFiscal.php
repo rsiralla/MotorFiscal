@@ -416,7 +416,8 @@ class DocumentoFiscal extends Base
         if ($item->imposto->ICMS->CST == '20'
             || $item->imposto->ICMS->CST == '51'
             || $item->imposto->ICMS->CST == '70'
-            || $item->imposto->ICMS->CST == '90') {
+            || $item->imposto->ICMS->CST == '90'
+            || $item->imposto->ICMS->CSOSN == '900') {
             /* N14 */
             $item->imposto->ICMS->pRedBC      = $tributacaoICMS->PercRedICMS;
             $vBC_ICMS_Red                     = round($vBC_ICMS * (100 - $item->imposto->ICMS->pRedBC) / 100, 2);
