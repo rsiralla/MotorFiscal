@@ -3,7 +3,7 @@
 O **Motor Fiscal** é um uma biblioteca com objetivo de facilitar o cálculo de impostos para *Nota Fiscal Eletrônica* (**NF-e**) Nota Fiscal a Consumidor Eletronica (**NFC-e**) e para a Nota Fiscal de Serviços Eletrônica (**NFS-e**). Toda a estrutura das classes é baseada no manual da NF-e.
 
 Visto o **ICMS** ser **estadual** e o **ISS** ser **municipal** podem existir particularidades nos cálculos dos impostos para estados/municipios. 
-Os chamados abertos (issues) serão atentidos tãologo quanto possível. Caso haja urgência no atendimento pode-se solicitar horas de consultoria para o autor através do e-mail jonatas.fischer@hotmail.com
+Os chamados abertos (issues) serão atentidos tão logo quanto possível. Caso precise de suporte para implantar em seu sistema você consultoria para implantação pode ser obtida através do email jonatas.fischer@hotmail.com
 
 ## Utilização
 Dento da pasta tests existem exemplos de diversos calculos de notas fiscais para empresas optantes pelo simples nacional e empresas RPA. Abaixo segue um breve exemplo de como utilizar a classe:
