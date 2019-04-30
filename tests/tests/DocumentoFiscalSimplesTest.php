@@ -72,6 +72,54 @@ class DocumentoFiscalSimplesTest extends TestCase
 		$this->assertEquals(1, $item->nItem, "N�mero do Item");
 	}
 	
+	public function testCSOSN900IPI()
+	{
+		$prod                    = new Produto();
+		$prod->identificador     = 3;
+		$prod->TipoTributacaoIPI = 0;
+		$prod->FormaAquisicao    = 1; //Adiquirida de Terceiros
+		$prod->vProd             = 100;
+		$prod->vDesc             = 10;
+		$prod->vFrete            = 10;
+		$prod->vOutro            = 10;
+		$prod->vSeg              = 10;
+		$this->NF->itens         = array();
+		
+		$item = &$this->NF->addItem($prod);
+		$this->NF->totalizarDocumento();
+		$this->assertEquals(null, $item->imposto->ICMS->CST, "CST");
+		$this->assertEquals(101, $item->imposto->ICMS->CSOSN, "CSOSN");
+		$this->assertEquals(null, $item->imposto->ICMS->modBC, "modBC");
+		$this->assertEquals(null, $item->imposto->ICMS->pRedBC, "pRedBC");
+		$this->assertEquals(null, $item->imposto->ICMS->vBC, "vBC");
+		$this->assertEquals(null, $item->imposto->ICMS->vBC_Desonerado, "vBC_Desonerado");
+		$this->assertEquals(null, $item->imposto->ICMS->pICMS, "pICMS");
+		$this->assertEquals(null, $item->imposto->ICMS->pICMS_Desonerado, "pICMS_Desonerado");
+		$this->assertEquals(null, $item->imposto->ICMS->pDif, "pDif");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMSDif, "vICMSDif");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMS, "vICMS");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMS_Desonerado, "vICMS_Desonerado");
+		$this->assertEquals(null, $item->imposto->ICMS->modBCST, "modBCST");
+		$this->assertEquals(null, $item->imposto->ICMS->pMVAST, "pMVAST");
+		$this->assertEquals(null, $item->imposto->ICMS->pRedBCST, "pRedBCST");
+		$this->assertEquals(null, $item->imposto->ICMS->vBCST, "vBCST");
+		$this->assertEquals(258, $item->imposto->ICMS->vBCST_NaoDestacado, "vBCST_NaoDestacado");
+		$this->assertEquals(null, $item->imposto->ICMS->pICMSST, "pICMSST");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMSST, "vICMSST");
+		$this->assertEquals('29.46', $item->imposto->ICMS->vICMSST_NaoDestacado, "vICMSST_NaoDestacado");
+		$this->assertEquals(null, $item->imposto->ICMS->UFST, "UFST");
+		$this->assertEquals(null, $item->imposto->ICMS->pBCOp, "pBCOp");
+		$this->assertEquals(null, $item->imposto->ICMS->vBCSTRet, "vBCSTRet");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMSSTRet, "vICMSSTRet");
+		$this->assertEquals(null, $item->imposto->ICMS->UFST, "UFST");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMSDeson, "vICMSDeson");
+		$this->assertEquals(null, $item->imposto->ICMS->motDesICMS, "motDesICMS");
+		$this->assertEquals(5, $item->imposto->ICMS->pCredSN, "pCredSN");
+		$this->assertEquals(6.0, $item->imposto->ICMS->vCredICMSSN, "vCredICMSSN");
+		$this->assertEquals(null, $item->imposto->ICMS->vBCSTDest, "vBCSTDest");
+		$this->assertEquals(null, $item->imposto->ICMS->vICMSSTDest, "vICMSSTDest");
+		$this->assertEquals(1, $item->nItem, "N�mero do Item");
+	}
 	
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

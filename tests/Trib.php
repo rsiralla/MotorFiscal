@@ -86,6 +86,13 @@ class Trib
 		$config2->CSOSN          = '201';
 		$config2->CST            = '10';
 		$icmstrib[1][1][1][2]    = $config2;
+
+		$config2->DestacarICMSST = 0;
+
+		$config3                  = clone $config;
+		$config3->PercRedICMS     = 50;
+		$config3->CSOSN           = '900';
+		$icmstrib[1][1][1][3]    = $config2;
 		
 		return $icmstrib[$emit][$dest][$oper][$prod];
 	}
