@@ -12,7 +12,7 @@ class Trib
 	static function IPI($prod, $oper, $emit, $dest)
 	{
 		$ipitrib             = array();
-		$config              = new \stdClass();
+		$config              = new stdClass();
 		$config->CST         = '00';
 		$config->Aliquota    = 10;
 		$config->clEnq       = 999;
@@ -26,13 +26,15 @@ class Trib
 		$config2->Aliquota   = 0;
 		$ipitrib[1][1][1][2] = $config2;
 		
+		$ipitrib[1][1][1][3] = $config2;
+		
 		return $ipitrib[$emit][$dest][$oper][$prod];
 	}
 	
 	
 	static function PIS($prod, $oper, $emit, $dest)
 	{
-		$config              = new \stdClass();
+		$config              = new stdClass();
 		$config->CST         = '01';
 		$config->AliquotaPis = 1.65;
 		$config->qTrib       = 0;
@@ -44,7 +46,7 @@ class Trib
 	
 	static function COFINS($prod, $oper, $emit, $dest)
 	{
-		$config                 = new \stdClass();
+		$config                 = new stdClass();
 		$config->CST            = '01';
 		$config->AliquotaCofins = 7.6;
 		$config->qTrib          = 0;
@@ -58,7 +60,7 @@ class Trib
 	{
 		$icmstrib = array();
 		/* Tributação 1 - CSOSN 101 com IPI e ICMS ST Não Destacado */
-		$config                       = new \stdClass();
+		$config                       = new stdClass();
 		$config->CSOSN                = '101';
 		$config->CST                  = '00';
 		$config->IncluirIPIBaseICMS   = 0;
@@ -86,13 +88,15 @@ class Trib
 		$config2->CSOSN          = '201';
 		$config2->CST            = '10';
 		$icmstrib[1][1][1][2]    = $config2;
-
-		$config2->DestacarICMSST = 0;
-
-		$config3                  = clone $config;
-		$config3->PercRedICMS     = 50;
-		$config3->CSOSN           = '900';
-		$icmstrib[1][1][1][3]    = $config2;
+		
+		$config3                       = clone $config;
+		$config3->PercRedICMS          = 50;
+		$config3->CSOSN                = '900';
+		$config3->ModalidadeBaseICMSST = -1;
+		$config3->AliquotaICMSST       = 0;
+		$config3->PercMVAAjustadoST    = 0;
+		$config3->PercIcmsUFDest       = 0;
+		$icmstrib[1][1][1][3]          = $config3;
 		
 		return $icmstrib[$emit][$dest][$oper][$prod];
 	}

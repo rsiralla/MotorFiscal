@@ -3,11 +3,11 @@
 namespace MotorFiscal;
 
 use MotorFiscal\Estadual\ICMS;
+use MotorFiscal\Estadual\ICMSTot;
 use MotorFiscal\Federal\COFINS;
 use MotorFiscal\Federal\IPI;
 use MotorFiscal\Federal\PIS;
 use MotorFiscal\Municipal\ISSQN;
-use MotorFiscal\Estadual\ICMSTot;
 
 /**
  * Classe representada pelo item H01 da NF-e/NFC-e
@@ -18,7 +18,7 @@ Class ItemFiscal extends Base
     // 0 = Produto; 1 = Serviço
     /**
      * NF-e/NFC-e :M01 - imposto
-     * @var Imposto
+     * @var \MotorFiscal\Imposto
      */
     public $imposto;
 
@@ -41,7 +41,7 @@ Class ItemFiscal extends Base
     
     /**
      * Operação do Item da Nota Fiscal
-     * 
+     *
      */
     public $Operacao;
     private $tipoItem = 0;

@@ -217,23 +217,23 @@ class DocumentoFiscal extends Base
                         /* Margem Valor Agregado (%) */
                         if ($item->imposto->ICMS->modBCST == 4) {
                             /* Percentual MVA Ajustado */
-                            /* N18 */
-                            $item->imposto->ICMS->modBCST = $tributacaoICMS->ModalidadeBaseICMSST;
                             /* N19 */
                             $item->imposto->ICMS->pMVAST = $tributacaoICMS->PercMVAAjustadoST;
-                            /* ============= Base do ICMS-ST ================= */
-                            $vBC_ICMS_ST = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg
-                                + $produto->vOutro;
+	
+	                        /* ============= Base do ICMS-ST ================= */
+	                        $vBC_ICMS_ST = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg
+	                                       + $produto->vOutro;
                             /* Incluindo IPI na base do ICMS-ST */
-
                             //se o Emitente é contribuinte do IPI
                             if ($this->emit->ContribuinteIPI) {
                                 $vBC_ICMS_ST += (empty($item->imposto->IPI->vIPI)) ? 0 : $item->imposto->IPI->vIPI;
                             }
+
                             $vBC_ICMS_ST = round($vBC_ICMS_ST * (100 + $item->imposto->ICMS->pMVAST) / 100, 2);
                             if ($item->imposto->ICMS->pRedBCST > 0) {
                                 $vBC_ICMS_ST = round($vBC_ICMS_ST * (100 - $item->imposto->ICMS->pRedBCST) / 100, 2);
                             }
+
                             /* N21 */
                             $item->imposto->ICMS->vBCST = number_format($vBC_ICMS_ST, 2, '.', '');
                         } else {
@@ -246,7 +246,9 @@ class DocumentoFiscal extends Base
                                 * $tributacaoICMS->AliquotaICMSST / 100, 2)
                             - $item->imposto->ICMS->vICMS_Ficto, 2, '.',
                             ''); //." - $vICMS - {$item->imposto->ICMS->vBCST}";
-                        if (!$tributacaoICMS->DestacarICMSST == 1) {
+	
+	                    if(!$tributacaoICMS->DestacarICMSST)
+	                    {
 
                             /* Salva os valores do ICMS-ST Nao destacado */
                             /* N21 */
@@ -404,7 +406,6 @@ class DocumentoFiscal extends Base
             }
             //aplica MVA sobre ICMS próprio
             if ($item->imposto->ICMS->modBC == 0) {
-                print_r($tributacaoICMS);
                 $vBC_ICMS = $vBC_ICMS * (100 + $tributacaoICMS->PercMVAProprio) / 100;
             }
         } elseif ($item->imposto->ICMS->modBC == 1 || $item->imposto->ICMS->modBC == 2) {
@@ -891,7 +892,8 @@ class DocumentoFiscal extends Base
             //Interestadual para consumidor final
             if ($this->emit->UF != $this->dest->UF && $this->ide->indFinal == 1) {
                 $item->imposto->ICMSUFDest = new ICMSUFDest();
-                //Se não foi informado o ICMS para a UF de destino deve subir uma exceção
+	
+	            //Se não foi informado o ICMS para a UF de destino deve subir uma exceção
                 if (!isset($tributacaoICMS->PercIcmsUFDest)) {
                     throw new Exception('Deve ser informada a alíquota de ICMS interestadual para operações com partilha de ICMS');
                 }
