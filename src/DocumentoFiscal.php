@@ -511,8 +511,8 @@ class DocumentoFiscal extends Base
 
         return $result;
     }
-
-
+    
+    
     public function totalizarDocumento()
     {
         $vRetServ       = 0;
@@ -538,26 +538,17 @@ class DocumentoFiscal extends Base
 
         foreach ($this->itens as $item) {
             if ($item->prod->tipoItem() == Produto::PRODUTO) {
-                $this->ICMSTot->vBC        += (is_numeric($item->imposto->ICMS->vBC)) ? str_replace(",", "",
-                    $item->imposto->ICMS->vBC) : 0;
-                $this->ICMSTot->vICMS      += (is_numeric($item->imposto->ICMS->vICMS)) ? str_replace(",", "",
-                    $item->imposto->ICMS->vICMS) : 0;
-                $this->ICMSTot->vICMSDeson += (is_numeric($item->imposto->ICMS->vICMSDeson)) ? str_replace(",", "",
-                    $item->imposto->ICMS->vICMSDeson) : 0;
-                $this->ICMSTot->vBCST      += (is_numeric($item->imposto->ICMS->vBCST)) ? str_replace(",", "",
-                    $item->imposto->ICMS->vBCST) : 0;
-                $this->ICMSTot->vST        += (is_numeric($item->imposto->ICMS->vICMSST)) ? str_replace(",", "",
-                    $item->imposto->ICMS->vICMSST) : 0;
-                $this->ICMSTot->vProd      += (is_numeric($item->prod->vProd)) ? str_replace(",", "",
-                    $item->prod->vProd) : 0;
-                $this->ICMSTot->vFrete     += (is_numeric($item->prod->vFrete)) ? str_replace(",", "",
-                    $item->prod->vFrete) : 0;
-                $this->ICMSTot->vSeg       += (is_numeric($item->prod->vSeg)) ? str_replace(",", "",
-                    $item->prod->vSeg) : 0;
-                $this->ICMSTot->vDesc      += (is_numeric($item->prod->vDesc)) ? str_replace(",", "",
-                    $item->prod->vDesc) : 0;
-                $this->ICMSTot->vOutro     += (is_numeric($item->prod->vOutro)) ? str_replace(",", "",
-                    $item->prod->vOutro) : 0;
+    
+                $this->ICMSTot->vBC        += $this->toFloat($item->imposto->ICMS->vBC);
+                $this->ICMSTot->vICMS      += $this->toFloat($item->imposto->ICMS->vICMS);
+                $this->ICMSTot->vICMSDeson += $this->toFloat($item->imposto->ICMS->vICMSDeson);
+                $this->ICMSTot->vBCST      += $this->toFloat($item->imposto->ICMS->vBCST);
+                $this->ICMSTot->vST        += $this->toFloat($item->imposto->ICMS->vICMSST);
+                $this->ICMSTot->vProd      += $this->toFloat($item->prod->vProd);
+                $this->ICMSTot->vFrete     += $this->toFloat($item->prod->vFrete);
+                $this->ICMSTot->vSeg       += $this->toFloat($item->prod->vSeg);
+                $this->ICMSTot->vDesc      += $this->toFloat($item->prod->vDesc);
+                $this->ICMSTot->vOutro     += $this->toFloat($item->prod->vOutro);
 
                 if (!empty($item->imposto->vTotTrib)) {
                     $this->ICMSTot->vTotTrib += $item->imposto->vTotTrib;

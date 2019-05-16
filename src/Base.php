@@ -86,5 +86,13 @@ class Base
 	{
 		return property_exists($this, $name);
 	}
+    
+    
+    protected function toFloat($value)
+    {
+        return is_numeric($value)
+            ? str_replace(",", "", $value)
+            : 0;
+    }
 	
 }

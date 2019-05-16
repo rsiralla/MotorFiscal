@@ -13,78 +13,78 @@ class ICMSTot extends Base
 	/**
 	 * NF-e/NFC-e :W03 - vBC
 	 */
-	public $vBC;
+    public $vBC = 0;
 	/**
 	 * NF-e/NFC-e :W04 - vICMS
 	 */
-	public $vICMS;
+    public $vICMS = 0;
 	/**
 	 * NF-e/NFC-e :W04a - vICMSDeson
 	 */
-	public $vICMSDeson;
+    public $vICMSDeson = 0;
 	/**
 	 * NF-e/NFC-e :W04c - vFCPUFDest
 	 */
-	public $vFCPUFDest;
+    public $vFCPUFDest = 0;
 	/**
 	 * NF-e/NFC-e :W04e - vICMSUFDest
 	 */
-	public $vICMSUFDest;
+    public $vICMSUFDest = 0;
 	/**
 	 * NF-e/NFC-e :W04g - vICMSUFRemet
 	 */
-	public $vICMSUFRemet;
+    public $vICMSUFRemet = 0;
 	
 	/**
 	 * NF-e/NFC-e :W05 - vBCST
 	 */
-	public $vBCST;
+    public $vBCST = 0;
 	/**
 	 * NF-e/NFC-e :W06 - vST
 	 */
-	public $vST;
+    public $vST = 0;
 	/**
 	 * NF-e/NFC-e :W07 - vProd
 	 */
-	public $vProd;
+    public $vProd = 0;
 	/**
 	 * NF-e/NFC-e :W08 - vFrete
 	 */
-	public $vFrete;
+    public $vFrete = 0;
 	/**
 	 * NF-e/NFC-e :W09 - vSeg
 	 */
-	public $vSeg;
+    public $vSeg = 0;
 	/**
 	 * NF-e/NFC-e :W10 - vDesc
 	 */
-	public $vDesc;
+    public $vDesc = 0;
 	/**
 	 * NF-e/NFC-e :W11 - vII
 	 */
-	public $vII;
+    public $vII = 0;
 	/**
 	 * NF-e/NFC-e :W12 - vIPI
 	 */
-	public $vIPI;
+    public $vIPI = 0;
 	/**
 	 * NF-e/NFC-e :W13 - vPIS
 	 */
-	public $vPIS;
+    public $vPIS = 0;
 	/**
 	 * NF-e/NFC-e :W14 - vCOFINS
 	 */
-	public $vCOFINS;
+    public $vCOFINS = 0;
 	/**
 	 * NF-e/NFC-e :W15 - vOutro
 	 */
-	public $vOutro;
+    public $vOutro = 0;
 	/**
 	 * NF-e/NFC-e :W16 - vNF
 	 */
-	public $vNF;
+    public $vNF = 0;
 	/**
 	 * NF-e/NFC-e :W16a - vTotTrib
 	 */
-	public $vTotTrib;
+    public $vTotTrib = 0;
 }
