@@ -10,54 +10,53 @@ use MotorFiscal\Federal\PIS;
 use MotorFiscal\Municipal\ISSQN;
 
 /**
- * Classe representada pelo item H01 da NF-e/NFC-e
+ * Classe representada pelo item H01 da NF-e/NFC-e.
  */
-Class ItemFiscal extends Base
+class ItemFiscal extends Base
 {
-
     // 0 = Produto; 1 = Serviço
     /**
-     * NF-e/NFC-e :M01 - imposto
+     * NF-e/NFC-e :M01 - imposto.
+     *
      * @var \MotorFiscal\Imposto
      */
     public $imposto;
 
     /**
-     * NF-e/NFC-e :I01 - prod
+     * NF-e/NFC-e :I01 - prod.
+     *
      * @var Produto
      */
     public $prod;
-    
+
     /**
-     * NF-e/NFC-e :H02 - nItem
+     * NF-e/NFC-e :H02 - nItem.
      */
     public $nItem;
 
     /**
-     * NF-e/NFC-e :W02 - ICMSTot
+     * NF-e/NFC-e :W02 - ICMSTot.
+     *
      * @var ICMSTot
      */
     public $ICMSTot;
-    
+
     /**
-     * Operação do Item da Nota Fiscal
-     *
+     * Operação do Item da Nota Fiscal.
      */
     public $Operacao;
     private $tipoItem = 0;
 
-
     private function __construct()
     {
-
     }
 
     public static function criarItemFiscal(Produto $produto, Operacao $operacao, DocumentoFiscal $documento)
     {
-        $item           = new ItemFiscal();
+        $item = new self();
         $item->Operacao = $operacao;
-        $item->prod     = $produto;
-        $item->imposto  = new Imposto();
+        $item->prod = $produto;
+        $item->imposto = new Imposto();
 
         if ($produto->tipoItem === Produto::PRODUTO) {
             $item->imposto->ICMS = new ICMS();
@@ -68,14 +67,11 @@ Class ItemFiscal extends Base
             }
         } else {
             $item->imposto->ISSQN = new ISSQN();
-
         }
 
-        $item->imposto->PIS    = new PIS();
+        $item->imposto->PIS = new PIS();
         $item->imposto->COFINS = new COFINS();
 
         return $item;
-
     }
-
 }
