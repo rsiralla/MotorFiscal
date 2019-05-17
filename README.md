@@ -1,5 +1,5 @@
 # Motor Fiscal PHP
-
+[![Build Status](https://travis-ci.org/JonatasFischer/MotorFiscal.svg?branch=master)](https://travis-ci.org/JonatasFischer/MotorFiscal)
 [![Coverage Status](https://coveralls.io/repos/github/JonatasFischer/MotorFiscal/badge.svg?branch=master)](https://coveralls.io/github/JonatasFischer/MotorFiscal?branch=master)
 
 
