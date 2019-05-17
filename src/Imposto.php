@@ -29,7 +29,7 @@ class Imposto extends Base
     /**
      * NF-e/NFC-e :NA01 - ICMSUFDest.
      *
-     * @var \MotorFiscal\ICMSUFDest
+     * @var \MotorFiscal\Estadual\ICMSUFDest
      */
     public $ICMSUFDest;
     /**

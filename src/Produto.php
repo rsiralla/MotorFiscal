@@ -4,6 +4,9 @@ namespace MotorFiscal;
 
 /**
  * Classe representada pelo item H01 da NF-e/NFC-e.
+ *
+ * @property string $tipoItem
+ * @property string $identificador
  */
 class Produto extends Base
 {
@@ -107,10 +110,11 @@ class Produto extends Base
      */
     public $indTot = 1;
     protected $identificador;
+    protected $tipoItem = self::PRODUTO;
+    
     protected $cMunFG = '';
     protected $cMun = '';
     protected $cPais = '';
-    protected $tipoItem = self::PRODUTO;
     protected $cListServ = '';
     protected $cServico = '';
     protected $indISS = '';
