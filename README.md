@@ -1,6 +1,8 @@
 # Motor Fiscal PHP
 [![Build Status](https://travis-ci.org/JonatasFischer/MotorFiscal.svg?branch=master)](https://travis-ci.org/JonatasFischer/MotorFiscal)
+
 [![Coverage Status](https://coveralls.io/repos/github/JonatasFischer/MotorFiscal/badge.svg?branch=master)](https://coveralls.io/github/JonatasFischer/MotorFiscal?branch=master)
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JonatasFischer/MotorFiscal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JonatasFischer/MotorFiscal/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/JonatasFischer/MotorFiscal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/JonatasFischer/MotorFiscal/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/JonatasFischer/MotorFiscal/badges/build.png?b=master)](https://scrutinizer-ci.com/g/JonatasFischer/MotorFiscal/build-status/master)
