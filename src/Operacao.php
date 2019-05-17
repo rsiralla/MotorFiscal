@@ -6,7 +6,7 @@ class Operacao extends Base
 {
     public $identificador;
     public $CFOPMercadoria;
-    public $NaturezaOperacao;/*Descrição*/
+    public $NaturezaOperacao; /*Descrição*/
     public $CFOPMercadoriaST;
     public $CFOPMercadoriaSTSubstituido;
     public $CFOPProduto;
@@ -16,8 +16,7 @@ class Operacao extends Base
     public $finalidade;
     public $indFinal;
     public $indPres;
-    
-    
+
     public function isDevolucao($cfop)
     {
         $cfop_devolucao = [
@@ -105,16 +104,14 @@ class Operacao extends Base
             '7210',
             '7211',
             '7553',
-            '7556'
+            '7556',
         ];
-        $cfop           = trim(str_replace('.', '', $cfop));
-        
+        $cfop = trim(str_replace('.', '', $cfop));
+
         return in_array($cfop, $cfop_devolucao);
     }
-    
-    
-    /**
+
+    /*
      * Campos com chave para pesquisa do produto no banco de dados.
      */
-    
 }
