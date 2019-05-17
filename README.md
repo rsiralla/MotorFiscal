@@ -1,8 +1,6 @@
 # Motor Fiscal PHP
 
-[![Issues][ico-issues]][link-issues]
-[![Forks][ico-forks]][link-forks]
-[![Stars][ico-stars]][link-stars]
+[![Coverage Status](https://coveralls.io/repos/github/JonatasFischer/MotorFiscal/badge.svg?branch=master)](https://coveralls.io/github/JonatasFischer/MotorFiscal?branch=master)
 
 
 O **Motor Fiscal** é um uma biblioteca com objetivo de facilitar o cálculo de impostos para *Nota Fiscal Eletrônica* (**NF-e**) Nota Fiscal a Consumidor Eletronica (**NFC-e**) e para a Nota Fiscal de Serviços Eletrônica (**NFS-e**). Toda a estrutura das classes é baseada no manual da NF-e.
