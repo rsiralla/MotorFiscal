@@ -90,6 +90,10 @@ class Destinatario extends Base
 	 */
 	public $email;
 	
+	/**
+	 * NF-e/NFC-e :E18b - ISUF
+	 */
+	public $ISUF;
 	
 	public $tipo_cadastro;
 	public $id_estado;
