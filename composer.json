@@ -3,7 +3,7 @@
 	"description": "Classes para auxiliar no cálculo de notas fiscais",
 	"type": "library",
 	"license": "0BSD",
-	"version": "1.0.0-alpha",
+	"version": "1.0.0-stable",
 	"authors": [
 		{
 			"name": "Jonatas Fischer",
