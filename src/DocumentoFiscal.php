@@ -730,7 +730,7 @@ class DocumentoFiscal extends Base
     private function getTribCOFINS(Produto $produto, Operacao $operacao)
     {
         $callback = $this->buscaTribFunctionCOFINS;
-        if (!$this->tipoParametroPesquisa === self::IDENTIFICADOR) {
+        if ($this->tipoParametroPesquisa === self::IDENTIFICADOR) {
             $tributacaoCOFINS = $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
                 $this->dest->identificador);
         } else {
@@ -744,7 +744,7 @@ class DocumentoFiscal extends Base
     {
         $callback = $this->buscaTribFunctionIPI;
 
-        if (!$this->tipoParametroPesquisa === self::IDENTIFICADOR) {
+        if ($this->tipoParametroPesquisa === self::IDENTIFICADOR) {
             return $callback($produto->identificador, $operacao->identificador, $this->emit->identificador,
                 $this->dest->identificador);
         } else {
