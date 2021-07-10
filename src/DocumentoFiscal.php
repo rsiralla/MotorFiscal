@@ -17,7 +17,7 @@ class DocumentoFiscal extends Base
     const IDENTIFICADOR = 2;
 
     /**
-     * @var \MotorFiscal\Estadual\ICMSTot
+     * @var ICMSTot
      */
     public $ICMSTot;
 
@@ -27,19 +27,19 @@ class DocumentoFiscal extends Base
     public $ISSQNtot;
 
     /**
-     * @var \MotorFiscal\Federal\RetTrib
+     * @var RetTrib
      */
     public $retTrib;
     /**
-     * @var \MotorFiscal\Emitente
+     * @var Emitente
      */
     public $emit;
     /**
-     * @var \MotorFiscal\Destinatario
+     * @var Destinatario
      */
     public $dest;
     /**
-     * @var \MotorFiscal\IdentificacaoNFe
+     * @var IdentificacaoNFe
      */
     public $ide;
 
@@ -59,7 +59,7 @@ class DocumentoFiscal extends Base
 
     public $buscaTribFunctionISSQN;
     /**
-     * @var \MotorFiscal\Operacao
+     * @var Operacao
      */
     protected $operacao;
 
