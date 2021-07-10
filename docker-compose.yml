@@ -1,0 +1,9 @@
+version: '2'
+services:
+    apache_with_php:
+        image: phpstorm/php-73-apache-xdebug-27
+        build: .
+        volumes:
+            - ./:/var/www/html/
+        ports:
+            - "8080:80"

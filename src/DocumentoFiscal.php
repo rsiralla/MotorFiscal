@@ -100,7 +100,7 @@ class DocumentoFiscal extends Base
 
             /* ============================= Calculo da Tributacao do ICMS =================== */
 
-            $tributacaoICMS = $this->getTribICMS($produto, $operacao);
+            $tributacaoICMS = $this->getTributacaoICMS($produto, $operacao);
 
             $item->imposto->ICMS->assign($tributacaoICMS);
 
@@ -122,7 +122,7 @@ class DocumentoFiscal extends Base
                 $vBC_ICMS_FICTO = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vOutro
                     + $produto->vSeg;
 
-                $item->imposto->ICMS->vICMS_Ficto = round($vBC_ICMS_FICTO * $tributacaoICMS->AliquotaICMS / 100, 2);
+                $item->imposto->ICMS->setVICMSFicto(round($vBC_ICMS_FICTO * $tributacaoICMS->AliquotaICMS / 100, 2));
 
                 /* Calcula valor de crédito do ICMS */
                 $vBC_ICMS_CredSN = $produto->vProd - $produto->vDesc + $produto->vSeg + $produto->vOutro;
@@ -237,7 +237,7 @@ class DocumentoFiscal extends Base
                         /* N23 */
                         $item->imposto->ICMS->vICMSST = number_format(round($item->imposto->ICMS->vBCST
                                 * $tributacaoICMS->AliquotaICMSST / 100, 2)
-                            - $item->imposto->ICMS->vICMS_Ficto, 2, '.',
+                            - $item->imposto->ICMS->getVICMSFicto(), 2, '.',
                             ''); //." - $vICMS - {$item->imposto->ICMS->vBCST}";
 
                         if (!$tributacaoICMS->DestacarICMSST) {
@@ -287,7 +287,7 @@ class DocumentoFiscal extends Base
 
         /* Busca as informações de Tributacao do PIS */
 
-        $tributacaoPIS = $this->getTribPIS($produto, $operacao);
+        $tributacaoPIS = $this->getTributacaoPIS($produto, $operacao);
 
         $item->imposto->PIS->assign($tributacaoPIS);
         switch ($tributacaoPIS->CST) {
@@ -295,7 +295,7 @@ class DocumentoFiscal extends Base
             case '02':
                 $item->imposto->PIS->CST = $tributacaoPIS->CST;
                 $item->imposto->PIS->pPIS = $tributacaoPIS->AliquotaPis;
-                $item->imposto->PIS->vBC = $produto->vProd - $produto->vDesc;
+                $item->imposto->PIS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg + $produto->vOutro;
                 $item->imposto->PIS->vPIS = number_format(ceil($item->imposto->PIS->vBC * $item->imposto->PIS->pPIS)
                     / 100, 2, '.', '');
                 break;
@@ -317,7 +317,7 @@ class DocumentoFiscal extends Base
                 if ($tributacaoPIS->TipoTributacaoPISCOFINS == 0) {
                     $item->imposto->PIS->CST = $tributacaoPIS->CST;
                     $item->imposto->PIS->pPIS = $tributacaoPIS->AliquotaPis;
-                    $item->imposto->PIS->vBC = $produto->vProd - $produto->vDesc;
+                    $item->imposto->PIS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg + $produto->vOutro;
                     $item->imposto->PIS->vPIS = ceil($item->imposto->PIS->vBC * $item->imposto->PIS->pPIS) / 100;
                 } else {
                     $item->imposto->PIS->CST = $tributacaoPIS->CST;
@@ -332,7 +332,7 @@ class DocumentoFiscal extends Base
         /* Calcula a Base do PIS */
 
         /* ================== Busca as informacoes de Tributacao do COFINS ==================== */
-        $tributacaoCOFINS = $this->getTribCOFINS($produto, $operacao);
+        $tributacaoCOFINS = $this->getTributacaoCOFINS($produto, $operacao);
 
         $item->imposto->COFINS->assign($tributacaoCOFINS);
         /* Calcula a Base do COFINS */
@@ -342,7 +342,7 @@ class DocumentoFiscal extends Base
             case '02':
                 $item->imposto->COFINS->CST = $tributacaoCOFINS->CST;
                 $item->imposto->COFINS->pCOFINS = $tributacaoCOFINS->AliquotaCofins;
-                $item->imposto->COFINS->vBC = $produto->vProd - $produto->vDesc;
+                $item->imposto->COFINS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg  + $produto->vOutro;
                 $item->imposto->COFINS->vCOFINS = ceil($item->imposto->COFINS->vBC * $item->imposto->COFINS->pCOFINS)
                     / 100;
                 break;
@@ -364,7 +364,7 @@ class DocumentoFiscal extends Base
                 if ($tributacaoCOFINS->TipoTributacaoPISCOFINS == 0) {
                     $item->imposto->COFINS->CST = $tributacaoCOFINS->CST;
                     $item->imposto->COFINS->pCOFINS = $tributacaoCOFINS->AliquotaCofins;
-                    $item->imposto->COFINS->vBC = $produto->vProd - $produto->vDesc;
+                    $item->imposto->COFINS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg  + $produto->vOutro;
                     $item->imposto->COFINS->vCOFINS = ceil($item->imposto->COFINS->vBC
                             * $item->imposto->COFINS->pCOFINS) / 100;
                 } else {
@@ -385,6 +385,7 @@ class DocumentoFiscal extends Base
 
     private function &calcularTributacaoIntegral(ItemFiscal &$item, $tributacaoICMS, $produto)
     {
+        $vBC_ICMS = 0;
         /* N13 */
         $item->imposto->ICMS->modBC = $tributacaoICMS->ModalidadeBaseICMS;
         if ($item->imposto->ICMS->modBC == 3 || $item->imposto->ICMS->modBC == 0) {
@@ -413,18 +414,18 @@ class DocumentoFiscal extends Base
             /* N14 */
             $item->imposto->ICMS->pRedBC = $tributacaoICMS->PercRedICMS;
             $vBC_ICMS_Red = round($vBC_ICMS * (100 - $item->imposto->ICMS->pRedBC) / 100, 2);
-            $item->imposto->ICMS->vICMS_Ficto = round($vBC_ICMS_Red * $tributacaoICMS->AliquotaICMS / 100, 2);
+            $item->imposto->ICMS->setVICMSFicto(round($vBC_ICMS_Red * $tributacaoICMS->AliquotaICMS / 100, 2));
 
             if ($tributacaoICMS->DestacarICMSDes) {
                 $vICMSNorm = round($vBC_ICMS * $tributacaoICMS->AliquotaICMS / 100, 2);
                 /* N27a */
-                $item->imposto->ICMS->vICMSDeson = $vICMSNorm - $item->imposto->ICMS->vICMS_Ficto;
+                $item->imposto->ICMS->vICMSDeson = $vICMSNorm - $item->imposto->ICMS->getVICMSFicto();
                 /* N27a */
                 $item->imposto->ICMS->motDesICMS = $tributacaoICMS->MotivoDesICMS;
             }
             $vBC_ICMS = $vBC_ICMS_Red;
         } else {
-            $item->imposto->ICMS->vICMS_Ficto = round($vBC_ICMS * $tributacaoICMS->AliquotaICMS / 100, 2);
+            $item->imposto->ICMS->setVICMSFicto(round($vBC_ICMS * $tributacaoICMS->AliquotaICMS / 100, 2));
         }
 
         //destaca o ICMS apenas se estiver configurado para destacar o ICMS
@@ -432,7 +433,7 @@ class DocumentoFiscal extends Base
             /* N15 */
             $item->imposto->ICMS->vBC = number_format($vBC_ICMS, 2, '.', '');
             /* N17 */
-            $item->imposto->ICMS->vICMS = number_format($item->imposto->ICMS->vICMS_Ficto, 2, '.', '');
+            $item->imposto->ICMS->vICMS = number_format($item->imposto->ICMS->getVICMSFicto(), 2, '.', '');
             /* N16 */
             $item->imposto->ICMS->pICMS = $tributacaoICMS->AliquotaICMS;
 
@@ -468,15 +469,15 @@ class DocumentoFiscal extends Base
             /* N16 */
             $item->imposto->ICMS->pICMS = $tributacaoICMS->AliquotaICMS;
             /* N16a */
-            $item->imposto->ICMS->vICMSOp = ceil($item->imposto->ICMS->vICMS_Ficto * 100) / 100;
+            $item->imposto->ICMS->vICMSOp = ceil($item->imposto->ICMS->getVICMSFicto() * 100) / 100;
             /* N16b */
             $item->imposto->ICMS->pDif = $tributacaoICMS->PercDiferimento;
             /* N16c */
-            $item->imposto->ICMS->vICMSDif = ceil(round($item->imposto->ICMS->vICMS_Ficto
-                        - ($item->imposto->ICMS->vICMS_Ficto
+            $item->imposto->ICMS->vICMSDif = ceil(round($item->imposto->ICMS->getVICMSFicto()
+                        - ($item->imposto->ICMS->getVICMSFicto()
                             * $tributacaoICMS->PercDiferimento / 100), 2) * 100) / 100;
             /* N17 */
-            $item->imposto->ICMS->vICMS = $item->imposto->ICMS->vICMS_Ficto - $item->imposto->ICMS->vICMSDif;
+            $item->imposto->ICMS->vICMS = $item->imposto->ICMS->getVICMSFicto() - $item->imposto->ICMS->vICMSDif;
         }
 
         return $item;
@@ -669,7 +670,7 @@ class DocumentoFiscal extends Base
         return $vOutroTot;
     }
 
-    private function getTribISSQN(Produto $produto, Operacao $operacao)
+    private function getTributacaoISSQN(Produto $produto, Operacao $operacao)
     {
         $callback = $this->buscaTribFunctionISSQN;
         if ($this->tipoParametroPesquisa === self::IDENTIFICADOR) {
@@ -699,7 +700,7 @@ class DocumentoFiscal extends Base
         return $tabelaIBPT;
     }
 
-    private function getTribPIS(Produto $produto, Operacao $operacao)
+    private function getTributacaoPIS(Produto $produto, Operacao $operacao)
     {
         $callback = $this->buscaTribFunctionPIS;
 
@@ -713,7 +714,7 @@ class DocumentoFiscal extends Base
         return $tributacaoPIS;
     }
 
-    private function getTribICMS(Produto $produto, Operacao $operacao)
+    private function getTributacaoICMS(Produto $produto, Operacao $operacao)
     {
         $callback = $this->buscaTribFunctionICMS;
         /* pode pesquisar a tributação do produto passando dados como parametros ou os objetos*/
@@ -727,7 +728,7 @@ class DocumentoFiscal extends Base
         return $tributacaoICMS;
     }
 
-    private function getTribCOFINS(Produto $produto, Operacao $operacao)
+    private function getTributacaoCOFINS(Produto $produto, Operacao $operacao)
     {
         $callback = $this->buscaTribFunctionCOFINS;
         if ($this->tipoParametroPesquisa === self::IDENTIFICADOR) {
@@ -740,7 +741,7 @@ class DocumentoFiscal extends Base
         return $tributacaoCOFINS;
     }
 
-    private function getTribIPI(Produto $produto, Operacao $operacao)
+    private function getTributacaoIPI(Produto $produto, Operacao $operacao)
     {
         $callback = $this->buscaTribFunctionIPI;
 
@@ -809,7 +810,7 @@ class DocumentoFiscal extends Base
     {
         /* ================= Calcula Tributação do IPI ============================== */
         if (isset($this->buscaTribFunctionIPI) && $this->emit->ContribuinteIPI) {
-            $tributacaoIPI = $this->getTribIPI($item->prod, $item->Operacao);
+            $tributacaoIPI = $this->getTributacaoIPI($item->prod, $item->Operacao);
             $item->imposto->IPI->assign($tributacaoIPI);
             $item->imposto->IPI->CST = $tributacaoIPI->CST;
             $item->imposto->IPI->clEnq = $tributacaoIPI->clEnq;
@@ -866,7 +867,7 @@ class DocumentoFiscal extends Base
                     throw new Exception('Deve ser informada a alíquota de ICMS interestadual para operações com partilha de ICMS');
                 }
                 //Calculo da Partilha do ICMS
-                $item->imposto->ICMSUFDest->vBCUFDest = $item->imposto->ICMS->vICMS_Ficto;
+                $item->imposto->ICMSUFDest->vBCUFDest = $item->imposto->ICMS->getVICMSFicto();
                 $item->imposto->ICMSUFDest->pFCPUFDest = $tributacaoICMS->PercFCPUFDest;
                 $item->imposto->ICMSUFDest->pICMSUFDest = $tributacaoICMS->PercIcmsUFDest;
                 $item->imposto->ICMSUFDest->pICMSInter = $tributacaoICMS->AliquotaICMS;
@@ -917,7 +918,7 @@ class DocumentoFiscal extends Base
     private function &calcularTributacaoServicos(ItemFiscal &$item)
     {
         if ($item->prod->tipoItem() == Produto::SERVICO) {
-            $tributacaoISSQN = $this->getTribISSQN($item->prod, $item->Operacao);
+            $tributacaoISSQN = $this->getTributacaoISSQN($item->prod, $item->Operacao);
             $item->imposto->ISSQN = new ISSQN();
 
             //Calculo dos impostos

@@ -122,5 +122,21 @@ class ICMS extends Base
      * NF-e/NFC-e :N32 - vICMSSTDest.
      */
     public $vICMSSTDest;
-    protected $vICMS_Ficto = 0;
+    protected $vICMS_Ficto = 0.0;
+
+    /**
+     * @return float
+     */
+    public function getVICMSFicto()
+    {
+        return $this->vICMS_Ficto;
+    }
+
+    /**
+     * @param float $vICMS_Ficto
+     */
+    public function setVICMSFicto($vICMS_Ficto)
+    {
+        $this->vICMS_Ficto = $vICMS_Ficto;
+    }
 }
