@@ -405,6 +405,10 @@ class DocumentoFiscal extends Base
         //calcula a redução da base de calculo apenas para os casos
         //que possuem redução de base de calculo.
         if ($item->imposto->ICMS->CST == '20'
+            || $item->imposto->ICMS->CST == '30'
+            || $item->imposto->ICMS->CST == '50'
+            || $item->imposto->ICMS->CST == '41'
+            || $item->imposto->ICMS->CST == '50'
             || $item->imposto->ICMS->CST == '51'
             || $item->imposto->ICMS->CST == '70'
             || $item->imposto->ICMS->CST == '90'
