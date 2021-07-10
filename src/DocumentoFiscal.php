@@ -142,8 +142,7 @@ class DocumentoFiscal extends Base
                             /* N29 */
                             $item->imposto->ICMS->pCredSN = $this->emit->PercCreditoSimples;
                             /* N30 */
-                            $item->imposto->ICMS->vCredICMSSN = ceil(round($item->imposto->ICMS->pCredSN
-                                        * $vBC_ICMS_CredSN / 100, 2) * 100) / 100;
+                            $item->imposto->ICMS->vCredICMSSN = round($item->imposto->ICMS->pCredSN * $vBC_ICMS_CredSN / 100, 2);
                         }
                         break;
                     case '900':
@@ -154,8 +153,7 @@ class DocumentoFiscal extends Base
                             $item->imposto->ICMS->pCredSN = $this->emit->PercCreditoSimples;
                             //TODO: Adicionar Frete e outras despesas neste calculo
                             /* N30 */
-                            $item->imposto->ICMS->vCredICMSSN = ceil(round($item->imposto->ICMS->pCredSN
-                                        * $vBC_ICMS_CredSN / 100, 2) * 100) / 100;
+                            $item->imposto->ICMS->vCredICMSSN = round($item->imposto->ICMS->pCredSN * $vBC_ICMS_CredSN / 100, 2);
                         }
                         break;
                 }
@@ -295,8 +293,8 @@ class DocumentoFiscal extends Base
             case '02':
                 $item->imposto->PIS->CST = $tributacaoPIS->CST;
                 $item->imposto->PIS->pPIS = $tributacaoPIS->AliquotaPis;
-                $item->imposto->PIS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg + $produto->vOutro;
-                $item->imposto->PIS->vPIS = number_format(ceil($item->imposto->PIS->vBC * $item->imposto->PIS->pPIS)
+                $item->imposto->PIS->vBC =  $this->calcularBasePISCOFINS($item);
+                $item->imposto->PIS->vPIS = number_format(round($item->imposto->PIS->vBC * $item->imposto->PIS->pPIS)
                     / 100, 2, '.', '');
                 break;
             case '03':
@@ -317,8 +315,8 @@ class DocumentoFiscal extends Base
                 if ($tributacaoPIS->TipoTributacaoPISCOFINS == 0) {
                     $item->imposto->PIS->CST = $tributacaoPIS->CST;
                     $item->imposto->PIS->pPIS = $tributacaoPIS->AliquotaPis;
-                    $item->imposto->PIS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg + $produto->vOutro;
-                    $item->imposto->PIS->vPIS = ceil($item->imposto->PIS->vBC * $item->imposto->PIS->pPIS) / 100;
+                    $item->imposto->PIS->vBC = $this->calcularBasePISCOFINS($item);
+                    $item->imposto->PIS->vPIS = round($item->imposto->PIS->vBC * $item->imposto->PIS->pPIS) / 100;
                 } else {
                     $item->imposto->PIS->CST = $tributacaoPIS->CST;
                     $item->imposto->PIS->qBCProd = $produto->qTrib;
@@ -342,8 +340,8 @@ class DocumentoFiscal extends Base
             case '02':
                 $item->imposto->COFINS->CST = $tributacaoCOFINS->CST;
                 $item->imposto->COFINS->pCOFINS = $tributacaoCOFINS->AliquotaCofins;
-                $item->imposto->COFINS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg  + $produto->vOutro;
-                $item->imposto->COFINS->vCOFINS = ceil($item->imposto->COFINS->vBC * $item->imposto->COFINS->pCOFINS)
+                $item->imposto->COFINS->vBC = $this->calcularBasePISCOFINS($item);
+                $item->imposto->COFINS->vCOFINS = round($item->imposto->COFINS->vBC * $item->imposto->COFINS->pCOFINS)
                     / 100;
                 break;
             case '03':
@@ -364,8 +362,8 @@ class DocumentoFiscal extends Base
                 if ($tributacaoCOFINS->TipoTributacaoPISCOFINS == 0) {
                     $item->imposto->COFINS->CST = $tributacaoCOFINS->CST;
                     $item->imposto->COFINS->pCOFINS = $tributacaoCOFINS->AliquotaCofins;
-                    $item->imposto->COFINS->vBC = $produto->vProd - $produto->vDesc + $produto->vFrete + $produto->vSeg  + $produto->vOutro;
-                    $item->imposto->COFINS->vCOFINS = ceil($item->imposto->COFINS->vBC
+                    $item->imposto->COFINS->vBC = $this->calcularBasePISCOFINS($item);
+                    $item->imposto->COFINS->vCOFINS = round($item->imposto->COFINS->vBC
                             * $item->imposto->COFINS->pCOFINS) / 100;
                 } else {
                     $item->imposto->COFINS->CST = $tributacaoCOFINS->CST;
@@ -449,33 +447,34 @@ class DocumentoFiscal extends Base
                 $item->imposto->ICMSUFDest->vFCPUFDest = $item->imposto->ICMSUFDest->vBCUFDest
                     * $item->imposto->ICMSUFDest->pFCPUFDest / 100;
 
-                $diferencial_icms = ceil(round(($item->imposto->ICMSUFDest->vBCUFDest
+                $diferencial_icms = round(($item->imposto->ICMSUFDest->vBCUFDest
                         * $item->imposto->ICMSUFDest->pICMSUFDest / 100)
-                    - $item->imposto->ICMS->vICMS));
+                    - $item->imposto->ICMS->vICMS);
 
                 if ($diferencial_icms < 0) {
                     $diferencial_icms = 0;
                 }
 
-                $item->imposto->ICMSUFDest->vICMSUFDest = ceil(round($diferencial_icms
+                $item->imposto->ICMSUFDest->vICMSUFDest = round($diferencial_icms
                     * $item->imposto->ICMSUFDest->pICMSInterPart
-                    / 100));
+                    / 100);
                 $item->imposto->ICMSUFDest->vICMSUFRemet = $diferencial_icms - $item->imposto->ICMSUFDest->vICMSUFDest;
             }
         }
 
         if ($item->imposto->ICMS->CST == '51') {
-            $item->imposto->ICMS->vBC = ceil($vBC_ICMS * 100) / 100;
+            $item->imposto->ICMS->vBC = round($vBC_ICMS, 2);
             /* N16 */
             $item->imposto->ICMS->pICMS = $tributacaoICMS->AliquotaICMS;
             /* N16a */
-            $item->imposto->ICMS->vICMSOp = ceil($item->imposto->ICMS->getVICMSFicto() * 100) / 100;
+            $item->imposto->ICMS->vICMSOp = round($item->imposto->ICMS->getVICMSFicto(), 2);
             /* N16b */
             $item->imposto->ICMS->pDif = $tributacaoICMS->PercDiferimento;
             /* N16c */
-            $item->imposto->ICMS->vICMSDif = ceil(round($item->imposto->ICMS->getVICMSFicto()
-                        - ($item->imposto->ICMS->getVICMSFicto()
-                            * $tributacaoICMS->PercDiferimento / 100), 2) * 100) / 100;
+            $item->imposto->ICMS->vICMSDif = round($item->imposto->ICMS->getVICMSFicto()
+                    - ($item->imposto->ICMS->getVICMSFicto() * $tributacaoICMS->PercDiferimento / 100)
+                    , 2);
+
             /* N17 */
             $item->imposto->ICMS->vICMS = $item->imposto->ICMS->getVICMSFicto() - $item->imposto->ICMS->vICMSDif;
         }
@@ -875,19 +874,10 @@ class DocumentoFiscal extends Base
                 $item->imposto->ICMSUFDest->vFCPUFDest = $item->imposto->ICMSUFDest->vBCUFDest
                     * $item->imposto->ICMSUFDest->pFCPUFDest / 100;
 
-                $diferencial_icms = ceil(
-                    round(($item->imposto->ICMSUFDest->vBCUFDest
-                            * $item->imposto->ICMSUFDest->pICMSUFDest / 100)
-                        - ($item->imposto->ICMSUFDest->vBCUFDest
-                            * $item->imposto->ICMSUFDest->pICMSInter / 100)));
+                $diferencial_icms = $this->calculateDiferencial($item);
 
-                if ($diferencial_icms < 0) {
-                    $diferencial_icms = 0;
-                }
-
-                $item->imposto->ICMSUFDest->vICMSUFDest = ceil(round($diferencial_icms
-                    * $item->imposto->ICMSUFDest->pICMSInterPart
-                    / 100));
+                $item->imposto->ICMSUFDest->vICMSUFDest = round($diferencial_icms
+                    * $item->imposto->ICMSUFDest->pICMSInterPart / 100);
                 $item->imposto->ICMSUFDest->vICMSUFRemet = $diferencial_icms - $item->imposto->ICMSUFDest->vICMSUFDest;
             }
         }
@@ -969,5 +959,31 @@ class DocumentoFiscal extends Base
         }
 
         return $item;
+    }
+
+    /**
+     * @param $item ItemFiscal
+     * @return float
+     */
+    private function calcularBasePISCOFINS($item)
+    {
+        return $item->prod->vProd
+            + $item->prod->vFrete
+            + $item->prod->vSeg
+            + $item->prod->vOutro
+            - $item->prod->vDesc
+            - ($item->imposto->ICMS->vICMS ?: 0.0);
+    }
+
+    private function calculateDiferencial(ItemFiscal $item)
+    {
+        $diferencial_icms =
+            round($item->imposto->ICMSUFDest->vBCUFDest * $item->imposto->ICMSUFDest->pICMSUFDest / 100, 2)
+            - round($item->imposto->ICMSUFDest->vBCUFDest * $item->imposto->ICMSUFDest->pICMSInter / 100, 2);
+
+        if ($diferencial_icms < 0) {
+            $diferencial_icms = 0;
+        }
+        return $diferencial_icms;
     }
 }

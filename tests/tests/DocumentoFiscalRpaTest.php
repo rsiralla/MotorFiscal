@@ -67,7 +67,8 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertNull( $item->imposto->ICMS->vCredICMSSN, 'vCredICMSSN');
         $this->assertNull( $item->imposto->ICMS->vBCSTDest, 'vBCSTDest');
         $this->assertNull( $item->imposto->ICMS->vICMSSTDest, 'vICMSSTDest');
-        $this->assertEquals('1.98', $item->imposto->PIS->vPIS, 'vPIS');
+        $this->assertEquals('105.6', $item->imposto->PIS->vBC, 'PIS->vBC');
+        $this->assertEquals('1.74', $item->imposto->PIS->vPIS, 'vPIS');
         $this->assertEquals('01', $item->imposto->PIS->CST, 'CST');
         $this->assertEquals('18.00', $item->imposto->vTotTrib, 'vTotTrib');
         $this->assertEquals('1.65', $item->imposto->PIS->pPIS, 'pPIS');
@@ -78,7 +79,7 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertEquals(999, $item->imposto->IPI->cEnq, 'cEnq');
         $this->assertNull( $item->imposto->ISSQN, 'ISSQN Nulo');
 
-        $this->assertEquals(1, $item->nItem, 'N�mero do Item');
+        $this->assertEquals(1, $item->nItem, 'Número do Item');
     }
 
     public function testCST10IPIAliquotaZero_ICMSSTD()
@@ -126,7 +127,8 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertNull( $item->imposto->ICMS->vCredICMSSN, 'vCredICMSSN');
         $this->assertNull( $item->imposto->ICMS->vBCSTDest, 'vBCSTDest');
         $this->assertNull( $item->imposto->ICMS->vICMSSTDest, 'vICMSSTDest');
-        $this->assertEquals('1.65', $item->imposto->PIS->vPIS, 'vPIS');
+        $this->assertEquals('88', $item->imposto->PIS->vBC, 'PIS->vBC');
+        $this->assertEquals('1.45', $item->imposto->PIS->vPIS, 'vPIS');
         $this->assertEquals('01', $item->imposto->PIS->CST, 'CST');
         $this->assertEquals('20.00', $item->imposto->vTotTrib, 'vTotTrib');
         $this->assertEquals('1.65', $item->imposto->PIS->pPIS, 'pPIS');
@@ -137,7 +139,7 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertEquals(999, $item->imposto->IPI->cEnq, 'cEnq');
         $this->assertNull( $item->imposto->ISSQN, 'ISSQN Nulo');
 
-        $this->assertEquals(1, $item->nItem, 'N�mero do Item');
+        $this->assertEquals(1, $item->nItem, 'Número do Item');
     }
 
     public function testCST10IPINaoContribuinte_ICMSSTD()
@@ -185,7 +187,8 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertNull( $item->imposto->ICMS->vCredICMSSN, 'vCredICMSSN');
         $this->assertNull( $item->imposto->ICMS->vBCSTDest, 'vBCSTDest');
         $this->assertNull( $item->imposto->ICMS->vICMSSTDest, 'vICMSSTDest');
-        $this->assertEquals('1.65', $item->imposto->PIS->vPIS, 'vPIS');
+        $this->assertEquals('88', $item->imposto->PIS->vBC, 'PIS->vBC');
+        $this->assertEquals('1.45', $item->imposto->PIS->vPIS, 'vPIS');
         $this->assertEquals('01', $item->imposto->PIS->CST, 'CST');
         $this->assertEquals('20.00', $item->imposto->vTotTrib, 'vTotTrib');
         $this->assertEquals('1.65', $item->imposto->PIS->pPIS, 'pPIS');
@@ -196,7 +199,7 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertEquals(999, $item->imposto->IPI->cEnq, 'cEnq');
         $this->assertNull( $item->imposto->ISSQN, 'ISSQN Nulo');
 
-        $this->assertEquals(1, $item->nItem, 'N�mero do Item');
+        $this->assertEquals(1, $item->nItem, 'Número do Item');
     }
 
     public function testNFSe()
@@ -247,7 +250,7 @@ class DocumentoFiscalRpaTest extends TestCase
         $this->assertEquals(150, $this->NF->retTrib->vIRRF, 'Total do vIRRF do grupo retTrib');
         $this->assertEquals(10000, $this->NF->retTrib->vBCRetPrev, 'Total do vBCRetPrev do grupo retTrib');
         $this->assertEquals(1100, $this->NF->retTrib->vRetPrev, 'Total do vRetPrev do grupo retTrib');
-        $this->assertEquals(1, $item->nItem, 'N�mero do Item');
+        $this->assertEquals(1, $item->nItem, 'Número do Item');
         //$this->assertEquals(1, $this->NF->,"Valor da NF");
     }
 

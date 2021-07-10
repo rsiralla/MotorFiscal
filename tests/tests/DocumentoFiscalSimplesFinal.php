@@ -65,7 +65,7 @@ class DocumentoFiscalSimplesFinal extends TestCase
         $this->assertEquals(6.0, $item->imposto->ICMS->vCredICMSSN, 'vCredICMSSN');
         $this->assertEquals(null, $item->imposto->ICMS->vBCSTDest, 'vBCSTDest');
         $this->assertEquals(null, $item->imposto->ICMS->vICMSSTDest, 'vICMSSTDest');
-        $this->assertEquals(1, $item->nItem, 'N�mero do Item');
+        $this->assertEquals(1, $item->nItem, 'Número do Item');
     }
 
     /**
