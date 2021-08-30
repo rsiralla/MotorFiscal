@@ -408,6 +408,7 @@ class DocumentoFiscal extends Base
             || $item->imposto->ICMS->CST == '30'
             || $item->imposto->ICMS->CST == '50'
             || $item->imposto->ICMS->CST == '41'
+            || $item->imposto->ICMS->CST == '40'
             || $item->imposto->ICMS->CST == '50'
             || $item->imposto->ICMS->CST == '51'
             || $item->imposto->ICMS->CST == '70'
